@@ -6,28 +6,28 @@ export default function Platform() {
     <div className="min-h-screen bg-black text-white">
       <nav className="flex justify-between items-center p-4 border-b border-gray-800">
         <Link href="/">
-          <div className="text-4xl font-bold text-red-500 font-['Arial']">
+          <div className="text-4xl font-bold text-red-500 font-[&apos;Arial&apos;]">
             ProposalForge
           </div>
         </Link>
         <div className="flex gap-4">
           <Link href="/platform">
-            <Button variant="secondary" className="font-['Arial']">
+            <Button variant="secondary" className="font-[&apos;Arial&apos;]">
               ProposalForge Platform
             </Button>
           </Link>
           <Link href="/leadership">
-            <Button variant="secondary" className="font-['Arial']">
+            <Button variant="secondary" className="font-[&apos;Arial&apos;]">
               Leadership
             </Button>
           </Link>
           <Link href="/faqs">
-            <Button variant="secondary" className="font-['Arial']">
+            <Button variant="secondary" className="font-[&apos;Arial&apos;]">
               FAQs
             </Button>
           </Link>
           <Link href="/contact">
-            <Button variant="secondary" className="font-['Arial']">
+            <Button variant="secondary" className="font-[&apos;Arial&apos;]">
               Contact Us
             </Button>
           </Link>
