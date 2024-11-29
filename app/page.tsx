@@ -1,101 +1,127 @@
-import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Clock, Sparkles, FileEdit, Palette } from 'lucide-react'
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-black text-white">
+      {/* Navigation Banner */}
+      <nav className="flex justify-between items-center p-4 border-b border-gray-800">
+        <div className="text-4xl font-bold text-red-500 font-['Arial']">
+          ProposalForge
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="flex gap-4">
+          <Link href="/platform">
+            <Button variant="secondary" className="font-['Arial']">
+              ProposalForge Platform
+            </Button>
+          </Link>
+          <Link href="/leadership">
+            <Button variant="secondary" className="font-['Arial']">
+              Leadership
+            </Button>
+          </Link>
+          <Link href="/faqs">
+            <Button variant="secondary" className="font-['Arial']">
+              FAQs
+            </Button>
+          </Link>
+          <Link href="/contact">
+            <Button variant="secondary" className="font-['Arial']">
+              Contact Us
+            </Button>
+          </Link>
+        </div>
+      </nav>
+
+      {/* Features Grid */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card className="bg-white/5 border-gray-800">
+            <CardContent className="p-6 space-y-4">
+              <Clock className="w-12 h-12 text-blue-500" />
+              <h3 className="text-xl font-bold">
+                <span className="text-blue-500">Guaranteed</span> Quick Integration & Adoption
+              </h3>
+              <p className="text-gray-300">
+                Realize value quickly and eliminate the need for your team to learn a new platform. 
+                ProposalForge integrates smoothly with SharePoint, Excel, Word, and over 400 content libraries.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white/5 border-gray-800">
+            <CardContent className="p-6 space-y-4">
+              <Sparkles className="w-12 h-12 text-blue-500" />
+              <h3 className="text-xl font-bold">
+                <span className="text-blue-500">Create</span> Complete Proposals Quickly
+              </h3>
+              <p className="text-gray-300">
+                Generate entire 40-60-page Shipley-quality drafts at once. Save days in editing time 
+                as ProposalForge integrates win themes seamlessly throughout your proposal in a consistent voice and style.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white/5 border-gray-800">
+            <CardContent className="p-6 space-y-4">
+              <FileEdit className="w-12 h-12 text-blue-500" />
+              <h3 className="text-xl font-bold">
+                Accurate & Compliant <span className="text-blue-500">Every Time</span>
+              </h3>
+              <p className="text-gray-300">
+                ProposalForge generates hallucination, citation, and compliance reports at the push of a button 
+                with every draft, helping reduce the risk of inaccuracies and overlooked requirements.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white/5 border-gray-800">
+            <CardContent className="p-6 space-y-4">
+              <Palette className="w-12 h-12 text-blue-500" />
+              <h3 className="text-xl font-bold">
+                Iterate on Strategy, <span className="text-blue-500">Not Words</span>
+              </h3>
+              <p className="text-gray-300">
+                Spend more time perfecting your winning strategy. ProposalForge allows you to rapidly iterate 
+                on high-level concepts, helping you fine-tune innovative strategies quickly.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Additional Content */}
+        <div className="mt-16 max-w-4xl mx-auto space-y-8 text-center">
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">Experience the next generation of proposal development</h2>
+            <div className="grid gap-8">
+              <div>
+                <h3 className="text-xl font-bold mb-2">Winning content</h3>
+                <p className="text-gray-300">
+                  Powered by Shipley's know-how, ProposalForge guides you in creating winning content that is not only 
+                  accurate and compliant, but also resonates with your unique voice and value proposition.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-2">Empowered teams</h3>
+                <p className="text-gray-300">
+                  ProposalForge empowers your team with Shipley's expertise, fostering collaboration and knowledge 
+                  sharing, allowing for quicker and more effective responses to opportunities.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-2">Competitive edge</h3>
+                <p className="text-gray-300">
+                  Shipley's proven business development best practices are embedded within ProposalForge, ensuring 
+                  your proposals are crafted with the insights and expertise that give you a clear competitive edge.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  );
+  )
 }
+
