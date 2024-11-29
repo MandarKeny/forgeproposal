@@ -69,7 +69,7 @@ export default function Platform() {
             <h2 className="text-2xl font-bold mb-4 text-white">Reflective Response Engine</h2>
             <ul className="list-disc pl-5 space-y-2 text-white">
               <li>Generate complete, review-ready proposal drafts with no manual prompt engineering.</li>
-              <li>Enjoy content refined by ProposalForge based on Shipley best practices and thought leadership.</li>
+              <li>Enjoy content refined by ProposalForge based on ProposalForge best practices and thought leadership.</li>
               <li>Access over 40 domain-specific prompt modules tailored to each proposal section.</li>
             </ul>
           </div>
