@@ -56,8 +56,8 @@ export default function FAQs() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <nav className="flex justify-between items-center p-4 border-b border-gray-800">
+    <div className="min-h-screen bg-white text-black">
+      <nav className="flex justify-between items-center p-4 border-b border-gray-200">
         <Link href="/">
           <div className="text-4xl font-bold text-red-500 font-[&apos;Arial&apos;]">
             ProposalForge
@@ -88,13 +88,13 @@ export default function FAQs() {
       </nav>
 
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold mb-8 text-white">Frequently Asked Questions</h1>
+        <h1 className="text-3xl font-bold mb-8 text-black">Frequently Asked Questions</h1>
 
         <div className="space-y-6">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-white/5 p-6 rounded-lg border border-gray-800">
-              <h2 className="text-xl font-bold mb-2 text-white">{faq.question}</h2>
-              <p className="text-white">{faq.answer}</p>
+            <div key={index} className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h2 className="text-xl font-bold mb-2 text-black">{faq.question}</h2>
+              <p className="text-gray-600">{faq.answer}</p>
             </div>
           ))}
         </div>
