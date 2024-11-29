@@ -64,7 +64,7 @@ export default function Leadership() {
               <h2 className="text-2xl font-bold mb-2">Lokesh Dange</h2>
               <h3 className="text-xl mb-4 text-blue-400">Product Prophet</h3>
               <p className="text-gray-300">
-                From a small town in Maharashtra to Delhi's startup ecosystem, Lokesh Dange turned from civil engineering to product management, where he now drives fintech innovation at Moglix. With over 5 years of experience, he has scaled Credlix's AUM to $50M and previously led Vedanta's e-commerce portal handling $15B in annual orders. A continuous learner and strategic thinker, Lokesh combines his expertise in product management, growth marketing, and analytics to help businesses scale effectively in India's dynamic startup landscape.
+                From a small town in Maharashtra to National Capital startup ecosystem, Lokesh Dange turned from civil engineering to product management, where he now drives fintech innovation at Moglix. With over 5 years of experience, he has scaled Credlix AUM to $50M and previously led Vedanta e-commerce portal handling $15B in annual orders. A continuous learner and strategic thinker, Lokesh combines his expertise in product management, growth marketing, and analytics to help businesses scale effectively in the India dynamic startup landscape.
               </p>
             </CardContent>
           </Card>

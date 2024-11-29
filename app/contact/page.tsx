@@ -63,7 +63,7 @@ export default function Contact() {
         <div className="mt-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Get in Touch</h2>
           <p className="text-gray-300 mb-4">
-            Have questions about ProposalForge? We're here to help! Reach out to us using the form above or contact us directly:
+            Have questions about ProposalForge? We are here to help! Reach out to us using the form above or contact us directly:
           </p>
           <p className="text-gray-300">
             Email: info@proposalforge.com<br />
