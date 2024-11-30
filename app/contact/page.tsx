@@ -9,9 +9,7 @@ export default function Contact() {
     <div className="min-h-screen bg-white text-black">
       <nav className="flex justify-between items-center p-4 border-b border-gray-200">
         <Link href="/">
-          <div className="text-4xl font-bold text-red-500 font-[&apos;Arial&apos;]">
-            ProposalForge
-          </div>
+          <img src="/images/your-image-file-name.png" alt="ProposalForge Logo" className="h-48" />
         </Link>
         <div className="flex gap-4">
           <Link href="/platform">

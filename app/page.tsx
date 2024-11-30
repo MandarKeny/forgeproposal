@@ -9,9 +9,7 @@ export default function Home() {
       {/* Navigation Banner */}
       <nav className="flex justify-between items-center p-4 border-b border-gray-200">
         <Link href="/">
-          <div className="text-4xl font-bold text-red-500 font-[&apos;Arial&apos;]">
-            ProposalForge
-          </div>
+          <img src="/images/your-image-file-name.png" alt="ProposalForge Logo" className="h-48" />
         </Link>
         <div className="flex gap-4">
           <Link href="/platform">
@@ -81,7 +79,7 @@ export default function Home() {
 
             {/* New Call-to-Action Box */}
             <div className="flex justify-center mt-12 mb-12">
-              <Link href="/contact">
+              <Link href="/credentials">
                 <div className="bg-red-500 hover:bg-red-600 transform hover:scale-105 transition-all duration-300 rounded-lg shadow-lg px-8 py-4 cursor-pointer">
                   <h3 className="text-2xl font-bold text-white text-center">
                     Click here to generate your proposal
