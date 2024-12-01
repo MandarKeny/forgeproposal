@@ -12,7 +12,7 @@ export default function AuthPage() {
   const router = useRouter();
   const supabase = createClientComponentClient();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
@@ -29,7 +29,7 @@ export default function AuthPage() {
 
         // Insert the user data into the table
         const { error: insertError } = await supabase.from('userdata').insert({
-          user_id: signUpData.user.id, // Ensure this matches auth.uid()
+          user_id: signUpData.user?.id, // Optional chaining to ensure user exists
           email,
         });
 
@@ -46,10 +46,11 @@ export default function AuthPage() {
 
         if (signInError) throw signInError;
 
+        // Redirect to the proposal input page
         router.push('/inputproposal');
       }
     } catch (error) {
-      setMessage(error.message || 'An error occurred');
+      setMessage((error as Error).message || 'An error occurred');
     } finally {
       setLoading(false);
     }
@@ -62,23 +63,25 @@ export default function AuthPage() {
           {isSignUp ? 'Create your account' : 'Sign in to your account'}
         </h2>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email address"
-            className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          />
-          <input
-            type="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          />
-          {message && <p className="text-sm text-red-500">{message}</p>}
+          <div className="space-y-4">
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email address"
+              className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            />
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            />
+          </div>
+          {message && <p className="text-sm text-red-500 text-center">{message}</p>}
           <button
             type="submit"
             disabled={loading}
@@ -89,7 +92,7 @@ export default function AuthPage() {
           <button
             type="button"
             onClick={() => setIsSignUp(!isSignUp)}
-            className="text-sm text-blue-500 hover:text-blue-700"
+            className="text-sm text-blue-500 hover:text-blue-700 block mx-auto"
           >
             {isSignUp ? 'Already have an account? Sign in' : 'Need an account? Sign up'}
           </button>
