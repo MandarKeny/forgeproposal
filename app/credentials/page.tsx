@@ -6,15 +6,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export default function CredentialsPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [mode, setMode] = useState<'signin' | 'signup'>('signin');
   const router = useRouter();
   const supabase = createClientComponentClient();
 
-  const handleAuth = async (e: React.FormEvent) => {
+  const handleAuth = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
@@ -23,11 +23,15 @@ export default function CredentialsPage() {
 
     try {
       if (mode === 'signup') {
-        const { data: existingUser } = await supabase
+        const { data: existingUser, error: selectError } = await supabase
           .from('userdata')
           .select('email')
           .eq('email', normalizedEmail)
           .single();
+
+        if (selectError && selectError.code !== 'PGRST116') {
+          throw selectError;
+        }
 
         if (existingUser) {
           throw new Error('User already exists. Please sign in instead.');
@@ -56,9 +60,11 @@ export default function CredentialsPage() {
           if (insertError) throw insertError;
         }
 
+        // Show success message for signup
         setError('Please check your email to confirm your account.');
         return;
       } else {
+        // Sign in
         const { error: signInError } = await supabase.auth.signInWithPassword({
           email: normalizedEmail,
           password,
@@ -66,12 +72,18 @@ export default function CredentialsPage() {
 
         if (signInError) throw signInError;
 
+        // Redirect on successful sign in
         router.push('/inputproposal');
         router.refresh();
       }
-    } catch (err: any) {
-      setError(err.message);
-      console.error('Auth error:', err);
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+        console.error('Auth error:', err);
+      } else {
+        setError('An unexpected error occurred.');
+        console.error('Unknown error:', err);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -83,8 +95,8 @@ export default function CredentialsPage() {
         <Link href="/">
           <Image 
             src="/images/your-image-file-name.png" 
-            alt="ProposalForge Logo" 
-            width={192} 
+            alt="Logo" 
+            width={257} 
             height={48} 
             className="h-48" 
           />
