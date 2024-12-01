@@ -56,11 +56,9 @@ export default function CredentialsPage() {
           if (insertError) throw insertError;
         }
 
-        // Show success message for signup
         setError('Please check your email to confirm your account.');
         return;
       } else {
-        // Sign in
         const { error: signInError } = await supabase.auth.signInWithPassword({
           email: normalizedEmail,
           password,
@@ -68,17 +66,12 @@ export default function CredentialsPage() {
 
         if (signInError) throw signInError;
 
-        // Redirect on successful sign in
         router.push('/inputproposal');
         router.refresh();
       }
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-        console.error('Auth error:', err);
-      } else {
-        console.error('An unknown error occurred:', err);
-      }
+    } catch (err: any) {
+      setError(err.message);
+      console.error('Auth error:', err);
     } finally {
       setIsLoading(false);
     }
@@ -91,7 +84,7 @@ export default function CredentialsPage() {
           <Image 
             src="/images/your-image-file-name.png" 
             alt="ProposalForge Logo" 
-            width={257} 
+            width={192} 
             height={48} 
             className="h-48" 
           />
