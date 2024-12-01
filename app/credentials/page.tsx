@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function CredentialsPage() {
   const [email, setEmail] = useState('');
@@ -22,7 +23,7 @@ export default function CredentialsPage() {
 
     try {
       if (mode === 'signup') {
-        const { data: existingUser, error: checkError } = await supabase
+        const { data: existingUser } = await supabase
           .from('userdata')
           .select('email')
           .eq('email', normalizedEmail)
@@ -36,8 +37,8 @@ export default function CredentialsPage() {
           email: normalizedEmail,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/auth/callback`
-          }
+            emailRedirectTo: `${window.location.origin}/auth/callback`,
+          },
         });
 
         if (signUpError) throw signUpError;
@@ -48,8 +49,8 @@ export default function CredentialsPage() {
             .insert([
               {
                 user_id: authData.user.id,
-                email: normalizedEmail
-              }
+                email: normalizedEmail,
+              },
             ]);
 
           if (insertError) throw insertError;
@@ -58,12 +59,11 @@ export default function CredentialsPage() {
         // Show success message for signup
         setError('Please check your email to confirm your account.');
         return;
-
       } else {
         // Sign in
         const { error: signInError } = await supabase.auth.signInWithPassword({
           email: normalizedEmail,
-          password
+          password,
         });
 
         if (signInError) throw signInError;
@@ -72,9 +72,13 @@ export default function CredentialsPage() {
         router.push('/inputproposal');
         router.refresh();
       }
-    } catch (err: any) {
-      setError(err.message);
-      console.error('Auth error:', err);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+        console.error('Auth error:', err);
+      } else {
+        console.error('An unknown error occurred:', err);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -84,7 +88,13 @@ export default function CredentialsPage() {
     <main className="min-h-screen bg-white text-black">
       <nav className="flex justify-between items-center p-4 border-b border-gray-200">
         <Link href="/">
-          <img src="/images/your-image-file-name.png" alt="ProposalForge Logo" className="h-48" />
+          <Image 
+            src="/images/your-image-file-name.png" 
+            alt="ProposalForge Logo" 
+            width={257} 
+            height={48} 
+            className="h-48" 
+          />
         </Link>
       </nav>
 

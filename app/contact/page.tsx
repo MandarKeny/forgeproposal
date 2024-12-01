@@ -1,15 +1,22 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function Contact() {
   return (
     <div className="min-h-screen bg-white text-black">
       <nav className="flex justify-between items-center p-4 border-b border-gray-200">
         <Link href="/">
-          <img src="/images/your-image-file-name.png" alt="ProposalForge Logo" className="h-48" />
+          <Image 
+            src="/images/your-image-file-name.png" 
+            alt="ProposalForge Logo" 
+            width={257} 
+            height={48} 
+            className="h-48"
+          />
         </Link>
         <div className="flex gap-4">
           <Link href="/platform">
@@ -71,6 +78,5 @@ export default function Contact() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-
