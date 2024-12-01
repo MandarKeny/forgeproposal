@@ -1,19 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-// TypeScript: Explicitly typing the parameters and return type
 const calculateCosts = (
   incidentTickets: number,
   serviceRequests: number,
   changeTickets: number
-): {
-  monthlyCost: number;
-  year1Cost: number;
-  year2Cost: number;
-  year3Cost: number;
-} => {
+) => {
   const MAX_INCIDENT_TICKETS = 80;
   const MAX_SERVICE_REQUESTS = 250;
   const MAX_CHANGE_TICKETS = 80;
@@ -21,8 +15,12 @@ const calculateCosts = (
   const PRICE_PER_ENGINEER_USA = 16000;
 
   const engineersForIncidents = Math.ceil(incidentTickets / MAX_INCIDENT_TICKETS);
-  const engineersForServiceRequests = Math.ceil(serviceRequests / MAX_SERVICE_REQUESTS);
-  const engineersForChangeTickets = Math.ceil(changeTickets / MAX_CHANGE_TICKETS);
+  const engineersForServiceRequests = Math.ceil(
+    serviceRequests / MAX_SERVICE_REQUESTS
+  );
+  const engineersForChangeTickets = Math.ceil(
+    changeTickets / MAX_CHANGE_TICKETS
+  );
 
   const totalEngineers =
     engineersForIncidents + engineersForServiceRequests + engineersForChangeTickets;
@@ -46,17 +44,20 @@ const calculateCosts = (
   };
 };
 
-const ResultsPage: React.FC = () => {
+const ResultsContent = () => {
   const searchParams = useSearchParams();
+  
   const incidentTickets = parseInt(searchParams.get("incidentTickets") || "0", 10);
   const serviceRequests = parseInt(searchParams.get("serviceRequests") || "0", 10);
   const changeTickets = parseInt(searchParams.get("changeTickets") || "0", 10);
 
-  const { monthlyCost, year1Cost, year2Cost, year3Cost } = calculateCosts(
+  const costs = calculateCosts(
     incidentTickets,
     serviceRequests,
     changeTickets
   );
+
+  const { monthlyCost, year1Cost, year2Cost, year3Cost } = costs;
 
   return (
     <div className="min-h-screen bg-white text-black">
@@ -120,7 +121,9 @@ const ResultsPage: React.FC = () => {
                   <td className="border border-gray-600 px-4 py-2 font-medium">
                     Monthly Cost (USD)
                   </td>
-                  <td className="border border-gray-600 px-4 py-2">${monthlyCost.toFixed(2)}</td>
+                  <td className="border border-gray-600 px-4 py-2">
+                    ${monthlyCost.toFixed(2)}
+                  </td>
                   <td className="border border-gray-600 px-4 py-2">-</td>
                   <td className="border border-gray-600 px-4 py-2">-</td>
                 </tr>
@@ -128,9 +131,15 @@ const ResultsPage: React.FC = () => {
                   <td className="border border-gray-600 px-4 py-2 font-medium">
                     Yearly Cost (USD)
                   </td>
-                  <td className="border border-gray-600 px-4 py-2">${year1Cost.toFixed(2)}</td>
-                  <td className="border border-gray-600 px-4 py-2">${year2Cost.toFixed(2)}</td>
-                  <td className="border border-gray-600 px-4 py-2">${year3Cost.toFixed(2)}</td>
+                  <td className="border border-gray-600 px-4 py-2">
+                    ${year1Cost.toFixed(2)}
+                  </td>
+                  <td className="border border-gray-600 px-4 py-2">
+                    ${year2Cost.toFixed(2)}
+                  </td>
+                  <td className="border border-gray-600 px-4 py-2">
+                    ${year3Cost.toFixed(2)}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -142,13 +151,28 @@ const ResultsPage: React.FC = () => {
             <ul className="list-disc list-inside text-sm text-black">
               <li>Above price is excluding VAT or any other taxes.</li>
               <li>
-                Price for Year 2 and Year 3 is valid if the contract is signed for 3 years.
+                Price for Year 2 and Year 3 is valid if the contract is signed for 3
+                years.
               </li>
             </ul>
           </div>
         </section>
       </div>
     </div>
+  );
+};
+
+const ResultsPage = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-xl">Loading...</div>
+        </div>
+      }
+    >
+      <ResultsContent />
+    </Suspense>
   );
 };
 
