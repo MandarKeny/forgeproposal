@@ -12,10 +12,24 @@ export default function AuthPage() {
   const router = useRouter();
   const supabase = createClientComponentClient();
 
+  const validateInput = () => {
+    if (!email.includes('@')) {
+      setMessage('Please enter a valid email address.');
+      return false;
+    }
+    if (password.length < 8) {
+      setMessage('Password must be at least 8 characters.');
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
     setMessage('');
+    if (!validateInput()) return;
+
+    setLoading(true);
 
     try {
       if (isSignUp) {
@@ -27,15 +41,15 @@ export default function AuthPage() {
 
         if (signUpError) throw signUpError;
 
-        // Insert the user data into the table
+        // Ensure the userdata table exists and has the required fields
         const { error: insertError } = await supabase.from('userdata').insert({
-          user_id: signUpData.user?.id, // Optional chaining to ensure user exists
+          user_id: signUpData.user?.id,
           email,
         });
 
         if (insertError) throw insertError;
 
-        // Redirect to the proposal input page
+        setMessage('Account created successfully! Redirecting...');
         router.push('/inputproposal');
       } else {
         // Sign in the user
@@ -46,11 +60,11 @@ export default function AuthPage() {
 
         if (signInError) throw signInError;
 
-        // Redirect to the proposal input page
+        setMessage('Login successful! Redirecting...');
         router.push('/inputproposal');
       }
     } catch (error) {
-      setMessage((error as Error).message || 'An error occurred');
+      setMessage((error as { message?: string })?.message || 'An unknown error occurred');
     } finally {
       setLoading(false);
     }
