@@ -3,7 +3,12 @@
 import React from "react";
 import { useSearchParams } from "next/navigation";
 
-const calculateCosts = (incidentTickets, serviceRequests, changeTickets) => {
+// Define types for the calculation function
+const calculateCosts = (
+  incidentTickets: number,
+  serviceRequests: number,
+  changeTickets: number
+) => {
   const MAX_INCIDENT_TICKETS = 80;
   const MAX_SERVICE_REQUESTS = 250;
   const MAX_CHANGE_TICKETS = 80;
