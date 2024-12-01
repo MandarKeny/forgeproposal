@@ -3,7 +3,17 @@
 import React from "react";
 import { useSearchParams } from "next/navigation";
 
-const calculateCosts = (incidentTickets, serviceRequests, changeTickets) => {
+// TypeScript: Explicitly typing the parameters and return type
+const calculateCosts = (
+  incidentTickets: number,
+  serviceRequests: number,
+  changeTickets: number
+): {
+  monthlyCost: number;
+  year1Cost: number;
+  year2Cost: number;
+  year3Cost: number;
+} => {
   const MAX_INCIDENT_TICKETS = 80;
   const MAX_SERVICE_REQUESTS = 250;
   const MAX_CHANGE_TICKETS = 80;
@@ -110,7 +120,7 @@ const ResultsPage: React.FC = () => {
                   <td className="border border-gray-600 px-4 py-2 font-medium">
                     Monthly Cost (USD)
                   </td>
-                  <td className="border border-gray-600 px-4 py-2">${monthlyCost}</td>
+                  <td className="border border-gray-600 px-4 py-2">${monthlyCost.toFixed(2)}</td>
                   <td className="border border-gray-600 px-4 py-2">-</td>
                   <td className="border border-gray-600 px-4 py-2">-</td>
                 </tr>
@@ -118,9 +128,9 @@ const ResultsPage: React.FC = () => {
                   <td className="border border-gray-600 px-4 py-2 font-medium">
                     Yearly Cost (USD)
                   </td>
-                  <td className="border border-gray-600 px-4 py-2">${year1Cost}</td>
-                  <td className="border border-gray-600 px-4 py-2">${year2Cost}</td>
-                  <td className="border border-gray-600 px-4 py-2">${year3Cost}</td>
+                  <td className="border border-gray-600 px-4 py-2">${year1Cost.toFixed(2)}</td>
+                  <td className="border border-gray-600 px-4 py-2">${year2Cost.toFixed(2)}</td>
+                  <td className="border border-gray-600 px-4 py-2">${year3Cost.toFixed(2)}</td>
                 </tr>
               </tbody>
             </table>
