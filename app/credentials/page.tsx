@@ -1,82 +1,156 @@
-"use client";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
-import Link from "next/link";
+'use client';
+import { useState } from 'react';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-export default function Credentials() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+export default function CredentialsPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [mode, setMode] = useState<'signin' | 'signup'>('signin');
+  const router = useRouter();
+  const supabase = createClientComponentClient();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Logging in with:", { username, password });
+    setIsLoading(true);
+    setError(null);
+
+    const normalizedEmail = email.toLowerCase();
+
+    try {
+      if (mode === 'signup') {
+        const { data: existingUser, error: checkError } = await supabase
+          .from('userdata')
+          .select('email')
+          .eq('email', normalizedEmail)
+          .single();
+
+        if (existingUser) {
+          throw new Error('User already exists. Please sign in instead.');
+        }
+
+        const { data: authData, error: signUpError } = await supabase.auth.signUp({
+          email: normalizedEmail,
+          password,
+          options: {
+            emailRedirectTo: `${window.location.origin}/auth/callback`
+          }
+        });
+
+        if (signUpError) throw signUpError;
+
+        if (authData.user) {
+          const { error: insertError } = await supabase
+            .from('userdata')
+            .insert([
+              {
+                user_id: authData.user.id,
+                email: normalizedEmail
+              }
+            ]);
+
+          if (insertError) throw insertError;
+        }
+
+        // Show success message for signup
+        setError('Please check your email to confirm your account.');
+        return;
+
+      } else {
+        // Sign in
+        const { error: signInError } = await supabase.auth.signInWithPassword({
+          email: normalizedEmail,
+          password
+        });
+
+        if (signInError) throw signInError;
+
+        // Redirect on successful sign in
+        router.push('/inputproposal');
+        router.refresh();
+      }
+    } catch (err: any) {
+      setError(err.message);
+      console.error('Auth error:', err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-white text-black">
+    <main className="min-h-screen bg-white text-black">
       <nav className="flex justify-between items-center p-4 border-b border-gray-200">
         <Link href="/">
           <img src="/images/your-image-file-name.png" alt="ProposalForge Logo" className="h-48" />
         </Link>
-        <div className="flex gap-4">
-          <Link href="/platform">
-            <Button variant="secondary" className="font-[&apos;Arial&apos;]">
-              ProposalForge Platform
-            </Button>
-          </Link>
-          <Link href="/leadership">
-            <Button variant="secondary" className="font-[&apos;Arial&apos;]">
-              Leadership
-            </Button>
-          </Link>
-          <Link href="/faqs">
-            <Button variant="secondary" className="font-[&apos;Arial&apos;]">
-              FAQs
-            </Button>
-          </Link>
-          <Link href="/contact">
-            <Button variant="secondary" className="font-[&apos;Arial&apos;]">
-              Contact Us
-            </Button>
-          </Link>
-        </div>
       </nav>
 
-      <div className="container mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold mb-8 text-black">Login</h1>
-        
-        <Card className="bg-gray-50 border-gray-200">
-          <CardContent className="p-6">
-            <form className="space-y-4" onSubmit={handleLogin}>
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-md mx-auto space-y-8">
+          <h1 className="text-4xl font-bold text-black text-center mb-8">
+            {mode === 'signin' ? 'Welcome Back' : 'Join Us'}
+          </h1>
+
+          <div className="bg-gray-50 p-8 rounded-lg shadow-lg border border-gray-200">
+            <form onSubmit={handleAuth} className="space-y-6">
               <div>
-                <label htmlFor="username" className="block text-sm font-medium mb-1 text-black">Username</label>
-                <Input 
-                  id="username" 
-                  placeholder="Your Username" 
-                  className="bg-white border-gray-200 text-black" 
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                <label htmlFor="email" className="block text-lg font-medium text-blue-500 mb-2">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  className="w-full p-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </div>
+
               <div>
-                <label htmlFor="password" className="block text-sm font-medium mb-1 text-black">Password</label>
-                <Input 
-                  id="password" 
-                  type="password" 
-                  placeholder="Your Password" 
-                  className="bg-white border-gray-200 text-black" 
+                <label htmlFor="password" className="block text-lg font-medium text-blue-500 mb-2">
+                  Password
+                </label>
+                <input
+                  id="password"
+                  type="password"
+                  className="w-full p-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
               </div>
-              <Button type="submit" className="w-full">Login</Button>
+
+              {error && <div className="text-red-500 text-sm">{error}</div>}
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 disabled:bg-blue-300"
+              >
+                {isLoading ? 'Processing...' : mode === 'signin' ? 'Sign In' : 'Sign Up'}
+              </button>
+
+              <div className="text-center">
+                <button
+                  type="button"
+                  onClick={() => setMode(mode === 'signin' ? 'signup' : 'signin')}
+                  className="text-blue-500 underline"
+                >
+                  {mode === 'signin'
+                    ? "Don't have an account? Sign up"
+                    : 'Already have an account? Sign in'}
+                </button>
+              </div>
             </form>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
