@@ -10,7 +10,12 @@ export default function AuthPage() {
   const [message, setMessage] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
   const router = useRouter();
-  const supabase = createClientComponentClient();
+
+  // Initialize Supabase client
+  const supabase = createClientComponentClient({
+    supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  });
 
   const validateInput = () => {
     if (!email.includes('@')) {
@@ -41,9 +46,9 @@ export default function AuthPage() {
 
         if (signUpError) throw signUpError;
 
-        // Ensure the userdata table exists and has the required fields
+        // Insert user data into the "userdata" table
         const { error: insertError } = await supabase.from('userdata').insert({
-          user_id: signUpData.user?.id,
+          user_id: signUpData?.user?.id,
           email,
         });
 
@@ -63,8 +68,8 @@ export default function AuthPage() {
         setMessage('Login successful! Redirecting...');
         router.push('/inputproposal');
       }
-    } catch (error) {
-      setMessage((error as { message?: string })?.message || 'An unknown error occurred');
+    } catch (error: any) {
+      setMessage(error?.message || 'An unknown error occurred');
     } finally {
       setLoading(false);
     }
