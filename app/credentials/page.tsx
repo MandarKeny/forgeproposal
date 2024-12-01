@@ -1,4 +1,6 @@
 'use client';
+export const dynamic = 'force-dynamic';
+
 import { useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
@@ -60,11 +62,9 @@ export default function CredentialsPage() {
           if (insertError) throw insertError;
         }
 
-        // Show success message for signup
         setError('Please check your email to confirm your account.');
         return;
       } else {
-        // Sign in
         const { error: signInError } = await supabase.auth.signInWithPassword({
           email: normalizedEmail,
           password,
@@ -72,7 +72,6 @@ export default function CredentialsPage() {
 
         if (signInError) throw signInError;
 
-        // Redirect on successful sign in
         router.push('/inputproposal');
         router.refresh();
       }
