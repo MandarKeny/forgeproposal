@@ -68,8 +68,12 @@ export default function AuthPage() {
         setMessage('Login successful! Redirecting...');
         router.push('/inputproposal');
       }
-    } catch (error: any) {
-      setMessage(error?.message || 'An unknown error occurred');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setMessage(error.message || 'An unknown error occurred');
+      } else {
+        setMessage('An unknown error occurred');
+      }
     } finally {
       setLoading(false);
     }
