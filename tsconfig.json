@@ -1,24 +1,25 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
+    "target": "esnext",                       // Target modern ECMAScript
+    "lib": ["dom", "dom.iterable", "esnext"], // Include DOM and ESNext features
+    "allowJs": true,                          // Allow JS files
+    "skipLibCheck": true,                     // Skip type checking for libraries
+    "strict": true,                           // Enable all strict type checking
+    "noEmit": true,                           // Disable output
+    "esModuleInterop": true,                  // Enable ES module interop
+    "module": "esnext",                       // Use ESNext module system
+    "moduleResolution": "node",              // Resolve modules like Node.js
+    "resolveJsonModule": true,                // Allow importing JSON files
+    "isolatedModules": true,                  // Enforce module boundaries
+    "jsx": "preserve",                        // Preserve JSX syntax
+    "incremental": true,                      // Enable incremental builds
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"]                          // Shorten import paths
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
