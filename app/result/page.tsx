@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import Image from 'next/image';
+import Image from "next/image";
 
 const ResultsContent = () => {
   const searchParams = useSearchParams();
@@ -11,7 +11,14 @@ const ResultsContent = () => {
   const incidentTickets = parseInt(searchParams.get("incidentTickets") || "0", 10);
   const serviceRequests = parseInt(searchParams.get("serviceRequests") || "0", 10);
   const changeTickets = parseInt(searchParams.get("changeTickets") || "0", 10);
-  const proposal = localStorage.getItem("generatedProposal") || "No proposal generated.";
+
+  // Safely retrieve data from localStorage
+  const [proposal, setProposal] = useState("Loading proposal...");
+
+  useEffect(() => {
+    const storedProposal = localStorage.getItem("generatedProposal") || "No proposal generated.";
+    setProposal(storedProposal);
+  }, []);
 
   const calculateCosts = (
     incidentTickets: number,
@@ -57,26 +64,34 @@ const ResultsContent = () => {
       {/* Navigation Banner */}
       <nav className="flex justify-between items-center p-4 border-b border-gray-200">
         <Link href="/">
-          <Image 
-            src="/images/your-image-file-name.png" 
-            alt="ProposalForge Logo" 
-            width={192} 
-            height={192} 
+          <Image
+            src="/images/your-image-file-name.png"
+            alt="ProposalForge Logo"
+            width={192}
+            height={192}
             priority
           />
         </Link>
         <div className="flex gap-4">
           <Link href="/platform">
-            <button className="font-[Arial] bg-gray-200 py-2 px-4 rounded hover:bg-gray-300">ProposalForge Platform</button>
+            <button className="font-[Arial] bg-gray-200 py-2 px-4 rounded hover:bg-gray-300">
+              ProposalForge Platform
+            </button>
           </Link>
           <Link href="/leadership">
-            <button className="font-[Arial] bg-gray-200 py-2 px-4 rounded hover:bg-gray-300">Leadership</button>
+            <button className="font-[Arial] bg-gray-200 py-2 px-4 rounded hover:bg-gray-300">
+              Leadership
+            </button>
           </Link>
           <Link href="/faqs">
-            <button className="font-[Arial] bg-gray-200 py-2 px-4 rounded hover:bg-gray-300">FAQs</button>
+            <button className="font-[Arial] bg-gray-200 py-2 px-4 rounded hover:bg-gray-300">
+              FAQs
+            </button>
           </Link>
           <Link href="/contact">
-            <button className="font-[Arial] bg-gray-200 py-2 px-4 rounded hover:bg-gray-300">Contact Us</button>
+            <button className="font-[Arial] bg-gray-200 py-2 px-4 rounded hover:bg-gray-300">
+              Contact Us
+            </button>
           </Link>
         </div>
       </nav>
@@ -140,4 +155,10 @@ const ResultsContent = () => {
   );
 };
 
-export default ResultsContent;
+export default function ResultPageWrapper() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResultsContent />
+    </Suspense>
+  );
+}
