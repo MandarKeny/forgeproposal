@@ -3,6 +3,7 @@
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from 'next/image';
 
 const ResultsContent = () => {
   const searchParams = useSearchParams();
@@ -56,7 +57,13 @@ const ResultsContent = () => {
       {/* Navigation Banner */}
       <nav className="flex justify-between items-center p-4 border-b border-gray-200">
         <Link href="/">
-          <img src="/images/your-image-file-name.png" alt="ProposalForge Logo" className="h-48" />
+          <Image 
+            src="/images/your-image-file-name.png" 
+            alt="ProposalForge Logo" 
+            width={192} 
+            height={192} 
+            priority
+          />
         </Link>
         <div className="flex gap-4">
           <Link href="/platform">
@@ -116,6 +123,16 @@ const ResultsContent = () => {
                 </tr>
               </tbody>
             </table>
+
+            {/* Pricing Assumptions Box */}
+            <div className="mt-4 bg-white p-4 rounded-lg border border-blue-900">
+              <h3 className="text-lg font-semibold text-blue-900 mb-2">Pricing Assumptions:</h3>
+              <ul className="list-disc pl-5 space-y-1 text-sm">
+                <li>Pricing is excluding VAT and any local taxes</li>
+                <li>Year 2 and Year 3 pricing is valid if the contract is signed for 3 years</li>
+                <li>Year-over-Year productivity benefits are baked into Year 2 and Year 3 pricing</li>
+              </ul>
+            </div>
           </div>
         </section>
       </div>

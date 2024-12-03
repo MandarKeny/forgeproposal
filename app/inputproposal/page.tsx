@@ -3,13 +3,23 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+
+interface FormData {
+  companyName: string;
+  clientName: string;
+  clientObjectives: string[];
+  incidentTickets: number;
+  serviceRequests: number;
+  changeTickets: number;
+}
 
 const InputProposalPage: React.FC = () => {
   const router = useRouter();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     companyName: "",
     clientName: "",
-    clientObjectives: [] as string[], // Store selected objectives
+    clientObjectives: [],
     incidentTickets: 0,
     serviceRequests: 0,
     changeTickets: 0,
@@ -72,9 +82,10 @@ const InputProposalPage: React.FC = () => {
       router.push(
         `/result?incidentTickets=${formData.incidentTickets}&serviceRequests=${formData.serviceRequests}&changeTickets=${formData.changeTickets}`
       );
-    } catch (error: any) {
-      console.error("Error generating proposal:", error.message);
-      alert(`Error: ${error.message}`);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+      console.error("Error generating proposal:", errorMessage);
+      alert(`Error: ${errorMessage}`);
     } finally {
       setIsProcessing(false);
     }
@@ -85,7 +96,13 @@ const InputProposalPage: React.FC = () => {
       {/* Navigation Banner */}
       <nav className="flex justify-between items-center p-4 border-b border-gray-200">
         <Link href="/">
-          <img src="/images/your-image-file-name.png" alt="ProposalForge Logo" className="h-48" />
+          <Image
+            src="/images/your-image-file-name.png"
+            alt="ProposalForge Logo"
+            width={192}  // Equivalent to h-48 (48 * 4 = 192px)
+            height={192}
+            priority
+          />
         </Link>
         <div className="flex gap-4">
           <Link href="/platform">
