@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const ResultsContent = () => {
   const searchParams = useSearchParams();
@@ -52,24 +53,48 @@ const ResultsContent = () => {
 
   return (
     <div className="min-h-screen bg-white text-black">
-      <div className="flex flex-col h-[calc(100vh-64px)]">
+      {/* Navigation Banner */}
+      <nav className="flex justify-between items-center p-4 border-b border-gray-200">
+        <Link href="/">
+          <img src="/images/your-image-file-name.png" alt="ProposalForge Logo" className="h-48" />
+        </Link>
+        <div className="flex gap-4">
+          <Link href="/platform">
+            <button className="font-[Arial] bg-gray-200 py-2 px-4 rounded hover:bg-gray-300">ProposalForge Platform</button>
+          </Link>
+          <Link href="/leadership">
+            <button className="font-[Arial] bg-gray-200 py-2 px-4 rounded hover:bg-gray-300">Leadership</button>
+          </Link>
+          <Link href="/faqs">
+            <button className="font-[Arial] bg-gray-200 py-2 px-4 rounded hover:bg-gray-300">FAQs</button>
+          </Link>
+          <Link href="/contact">
+            <button className="font-[Arial] bg-gray-200 py-2 px-4 rounded hover:bg-gray-300">Contact Us</button>
+          </Link>
+        </div>
+      </nav>
+
+      {/* Page Content */}
+      <div className="container mx-auto px-4 py-12">
         {/* Proposal Section */}
-        <section className="flex-1 overflow-auto border-b border-gray-300 p-8">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl font-bold mb-6">Generated Proposal</h1>
-            <div className="bg-gray-100 p-6 rounded-lg shadow-md overflow-y-scroll max-h-96 whitespace-pre-line">
-              {proposal}
-            </div>
+        <section className="mb-12">
+          <h1 className="text-3xl font-bold text-bg-blue-900 mb-7 text-center">
+            Your custom application support proposal document
+          </h1>
+          <div className="bg-gray-100 p-6 rounded-lg shadow-md overflow-y-scroll max-h-96 border-2 border-blue-900 max-w-5xl mx-auto">
+            <pre className="whitespace-pre-line">{proposal}</pre>
           </div>
         </section>
 
-        {/* Cost Section */}
-        <section className="flex-1 bg-gray-50 p-8">
-          <h2 className="text-xl font-bold mb-6 text-center">Cost Breakdown</h2>
+        {/* Cost Breakdown Section */}
+        <section>
+          <h2 className="text-3xl font-bold text-bg-blue-900 mb-7 text-center">
+            Budgetary quote based on client input ticket data
+          </h2>
           <div className="bg-gray-200 p-4 rounded-lg shadow-md">
             <table className="table-auto w-full text-center border-collapse">
               <thead>
-                <tr>
+                <tr className="bg-blue-900 text-white">
                   <th className="border px-4 py-2">Metric</th>
                   <th className="border px-4 py-2">Year 1</th>
                   <th className="border px-4 py-2">Year 2</th>

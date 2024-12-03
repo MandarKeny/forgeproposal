@@ -115,7 +115,7 @@ export default function AuthPage() {
           <button
             type="button"
             onClick={() => setIsSignUp(!isSignUp)}
-            className="text-sm text-blue-500 hover:text-blue-700 block mx-auto"
+            className="text-sm text-bg-blue-900 hover:text-bg-blue-900 block mx-auto"
           >
             {isSignUp ? 'Already have an account? Sign in' : 'Need an account? Sign up'}
           </button>

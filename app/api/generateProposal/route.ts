@@ -37,15 +37,28 @@ export async function POST(request: Request) {
     const customizedTemplate = proposalTemplate
       .replace(/\{\{ Your Company Name \}\}/g, companyName)
       .replace(/\{\{ Client Name \}\}/g, clientName)
-      .replace(/\{\{ Client Objectives \}\}/g, clientObjectives);
+      .replace(/\{\{ Client Objectives \}\}/g, clientObjectives.join(', '));
 
     // Use OpenAI to generate the final proposal
     const completion = await openai.chat.completions.create({
-      model: "gpt-4-1106-preview",
+      model: "gpt-3.5-turbo", // Use GPT-3.5 for cost-efficiency
+      max_tokens: 3500, // Allow enough content for 4-5 pages
+      temperature: 0.7, // Balanced creativity and focus
       messages: [
         {
           role: "system",
-          content: "You are a professional business proposal writer. Enhance and finalize the following proposal:",
+          content: `
+You are a professional business proposal writer at an IT services company. Provide a detailed, slightly elaborate, and polished proposal with persuasive language and comprehensive information based on the provided context. The proposal should include:
+- Our understanding of your objectives
+- Our capabilities
+- Proposed solution
+- SLAs and KPIs
+- Governance
+- Why partner with us
+- Featured enablers of our services
+
+The response must be between 4 to 5 pages long, ensuring thoroughness without unnecessary repetition.
+          `,
         },
         {
           role: "user",
