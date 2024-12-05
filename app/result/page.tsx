@@ -100,7 +100,7 @@ const ResultsContent = () => {
       <div className="container mx-auto px-4 py-12">
         {/* Proposal Section */}
         <section className="mb-12">
-          <h1 className="text-3xl font-bold text-bg-blue-900 mb-7 text-center">
+          <h1 className="text-3xl font-bold text-blue-900 mb-7 text-center flash-animation">
             Your custom application support proposal document
           </h1>
           <div className="bg-gray-100 p-6 rounded-lg shadow-md overflow-y-scroll max-h-96 border-2 border-blue-900 max-w-5xl mx-auto">
@@ -110,7 +110,7 @@ const ResultsContent = () => {
 
         {/* Cost Breakdown Section */}
         <section>
-          <h2 className="text-3xl font-bold text-bg-blue-900 mb-7 text-center">
+          <h2 className="text-3xl font-bold text-blue-900 mb-7 text-center flash-animation">
             Budgetary quote based on client input ticket data
           </h2>
           <div className="bg-gray-200 p-4 rounded-lg shadow-md">
