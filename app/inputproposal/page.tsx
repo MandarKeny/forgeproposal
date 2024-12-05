@@ -2,14 +2,30 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+
+// Define TypeScript interfaces
+interface FormDataType {
+  companyName: string;
+  clientName: string;
+  clientObjectives: string[];
+  incidentTickets: number;
+  serviceRequests: number;
+  changeTickets: number;
+  model: string;
+}
+
+interface ErrorType {
+  message: string;
+}
 
 const InputProposalPage: React.FC = () => {
   const router = useRouter();
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormDataType>({
     companyName: "",
     clientName: "",
-    clientObjectives: [] as string[],
+    clientObjectives: [],
     incidentTickets: 0,
     serviceRequests: 0,
     changeTickets: 0,
@@ -97,9 +113,10 @@ const InputProposalPage: React.FC = () => {
       router.push(
         `/result?incidentTickets=${formData.incidentTickets}&serviceRequests=${formData.serviceRequests}&changeTickets=${formData.changeTickets}`
       );
-    } catch (error: any) {
-      console.error("Error generating proposal:", error.message);
-      alert(`Error: ${error.message}`);
+    } catch (error) {
+      const typedError = error as ErrorType;
+      console.error("Error generating proposal:", typedError.message);
+      alert(`Error: ${typedError.message}`);
     } finally {
       setIsProcessing(false);
     }
@@ -110,7 +127,7 @@ const InputProposalPage: React.FC = () => {
       {/* Navigation Banner */}
       <nav className="flex justify-between items-center p-4 border-b border-gray-200">
         <Link href="/">
-          <img
+        <img
             src="/images/your-image-file-name.png"
             alt="ProposalForge Logo"
             className="h-36"
