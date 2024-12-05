@@ -130,19 +130,19 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             <blockquote className="bg-white p-6 rounded-lg shadow-md">
               <p className="text-gray-700 italic">
-                "ProposalForge has transformed our workflow. We’ve saved countless hours and seen a 50% increase in proposal acceptance rates!"
+                "ProposalForge has transformed our workflow. We've saved countless hours and seen a 50% increase in proposal acceptance rates!"
               </p>
               <footer className="mt-4 text-sm text-gray-500">— Ramesh Kumar, CEO at TechVision</footer>
             </blockquote>
             <blockquote className="bg-white p-6 rounded-lg shadow-md">
               <p className="text-gray-700 italic">
-                "The accuracy and speed of ProposalForge are unmatched. It’s like having a dedicated team working round the clock for you."
+                "The accuracy and speed of ProposalForge are unmatched. It's like having a dedicated team working round the clock for you."
               </p>
               <footer className="mt-4 text-sm text-gray-500">— Priya Sharma, Director at InnovateIndia</footer>
             </blockquote>
             <blockquote className="bg-white p-6 rounded-lg shadow-md">
               <p className="text-gray-700 italic">
-                "We’ve cut proposal creation time by over 70% thanks to ProposalForge. It’s a must-have for any competitive business."
+                "We've cut proposal creation time by over 70% thanks to ProposalForge. It's a must-have for any competitive business."
               </p>
               <footer className="mt-4 text-sm text-gray-500">— Vikram Malhotra, Manager at StratEdge</footer>
             </blockquote>
