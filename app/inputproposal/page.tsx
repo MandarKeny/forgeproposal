@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -24,7 +23,9 @@ const InputProposalPage: React.FC = () => {
       setSelectedTopic(topic);
     } else {
       e.preventDefault();
-      window.alert("Currently, ProposalForge is only configured for Application Support proposals. More options coming soon!");
+      window.alert(
+        "Currently, ProposalForge is only configured for Application Support proposals. More options coming soon!"
+      );
     }
   };
 
@@ -32,16 +33,16 @@ const InputProposalPage: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const target = e.target;
-  
+
     // Handle checkboxes for clientObjectives
     if (target instanceof HTMLInputElement && target.type === "checkbox") {
       const { name, value, checked } = target;
-  
+
       if (name === "clientObjectives") {
         const updatedObjectives = checked
-          ? [...formData.clientObjectives, value] // Add the value if checked
-          : formData.clientObjectives.filter((obj) => obj !== value); // Remove the value if unchecked
-  
+          ? [...formData.clientObjectives, value]
+          : formData.clientObjectives.filter((obj) => obj !== value);
+
         setFormData({ ...formData, clientObjectives: updatedObjectives });
       }
     } else {
@@ -53,16 +54,15 @@ const InputProposalPage: React.FC = () => {
           name === "incidentTickets" ||
           name === "serviceRequests" ||
           name === "changeTickets"
-            ? parseInt(value, 10) || 0 // Parse numeric inputs
-            : value, // Set text or select inputs
+            ? parseInt(value, 10) || 0
+            : value,
       });
     }
   };
-  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     if (
       !formData.companyName ||
       !formData.clientName ||
@@ -71,9 +71,9 @@ const InputProposalPage: React.FC = () => {
       alert("Please fill out all fields.");
       return;
     }
-  
+
     setIsProcessing(true);
-  
+
     try {
       const response = await fetch("/api/generateProposal", {
         method: "POST",
@@ -82,18 +82,18 @@ const InputProposalPage: React.FC = () => {
           companyName: formData.companyName,
           clientName: formData.clientName,
           clientObjectives: formData.clientObjectives,
-          model: formData.model, // Dynamically send selected model
+          model: formData.model,
         }),
       });
-  
+
       if (!response.ok) {
         const errorResponse = await response.json();
         throw new Error(errorResponse.error || "Failed to generate proposal.");
       }
-  
+
       const { proposal } = await response.json();
       localStorage.setItem("generatedProposal", proposal);
-  
+
       router.push(
         `/result?incidentTickets=${formData.incidentTickets}&serviceRequests=${formData.serviceRequests}&changeTickets=${formData.changeTickets}`
       );
@@ -104,14 +104,13 @@ const InputProposalPage: React.FC = () => {
       setIsProcessing(false);
     }
   };
-  
 
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Navigation Banner */}
       <nav className="flex justify-between items-center p-4 border-b border-gray-200">
         <Link href="/">
-        <img
+          <img
             src="/images/your-image-file-name.png"
             alt="ProposalForge Logo"
             className="h-36"
@@ -143,7 +142,11 @@ const InputProposalPage: React.FC = () => {
 
       {/* Info Box */}
       <div className="bg-blue-900 text-white p-4 rounded-lg shadow-md mb-8 text-center">
-        ProposalForge currently specializes in generating responses for application support proposals, helping enterprises maintain critical systems like SAP and CRM applications. Our platform streamlines the process of creating proposals for application support services, with new features planned for release in the coming months.
+        ProposalForge currently specializes in generating responses for
+        application support proposals, helping enterprises maintain critical
+        systems like SAP and CRM applications. Our platform streamlines the
+        process of creating proposals for application support services, with
+        new features planned for release in the coming months.
       </div>
 
       {/* Topic Selection Section */}
@@ -161,7 +164,7 @@ const InputProposalPage: React.FC = () => {
             />
             <span>Application Support</span>
           </label>
-          
+
           {["Infrastructure Support", "Service Desk"].map((topic) => (
             <label
               key={topic}
@@ -188,7 +191,10 @@ const InputProposalPage: React.FC = () => {
           <form onSubmit={handleSubmit}>
             {/* Company Name */}
             <div className="mb-4">
-              <label htmlFor="companyName" className="block text-sm font-medium">
+              <label
+                htmlFor="companyName"
+                className="block text-sm font-medium"
+              >
                 Your Company Name
               </label>
               <input
@@ -218,26 +224,29 @@ const InputProposalPage: React.FC = () => {
               />
             </div>
 
-{/* Model Selection */}
-<div className="mb-4">
-  <label htmlFor="model" className="block text-sm font-medium">
-    Select the LLM model
-  </label>
-  <select
-    id="model"
-    name="model"
-    value={formData.model}
-    onChange={handleInputChange}
-    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-  >
-    <option value="gpt-3.5-turbo">GPT-3.5 (Turbo)</option>
-    <option value="gpt-4o-mini">GPT-4O (Mini)</option>
-  </select>
-</div>
+            {/* Model Selection */}
+            <div className="mb-4">
+              <label htmlFor="model" className="block text-sm font-medium">
+                Select the LLM model
+              </label>
+              <select
+                id="model"
+                name="model"
+                value={formData.model}
+                onChange={handleInputChange}
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+              >
+                <option value="gpt-3.5-turbo">GPT-3.5 (Turbo)</option>
+                <option value="gpt-4o-mini">GPT-4O (Mini)</option>
+              </select>
+            </div>
 
             {/* Client Objectives */}
             <div className="mb-4">
-              <label htmlFor="clientObjectives" className="block text-sm font-medium">
+              <label
+                htmlFor="clientObjectives"
+                className="block text-sm font-medium"
+              >
                 Client Objectives
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
@@ -253,7 +262,10 @@ const InputProposalPage: React.FC = () => {
                   "Inadequate security and compliance measures",
                   "Unclear or poorly defined SLAs",
                 ].map((objective) => (
-                  <label key={objective} className="flex items-center space-x-2">
+                  <label
+                    key={objective}
+                    className="flex items-center space-x-2"
+                  >
                     <input
                       type="checkbox"
                       name="clientObjectives"
@@ -269,7 +281,10 @@ const InputProposalPage: React.FC = () => {
 
             {/* Incident Tickets */}
             <div className="mb-4">
-              <label htmlFor="incidentTickets" className="block text-sm font-medium">
+              <label
+                htmlFor="incidentTickets"
+                className="block text-sm font-medium"
+              >
                 Incident Tickets* (per month)
               </label>
               <input
@@ -285,7 +300,10 @@ const InputProposalPage: React.FC = () => {
 
             {/* Service Requests */}
             <div className="mb-4">
-              <label htmlFor="serviceRequests" className="block text-sm font-medium">
+              <label
+                htmlFor="serviceRequests"
+                className="block text-sm font-medium"
+              >
                 Service Requests* (per month)
               </label>
               <input
@@ -301,7 +319,10 @@ const InputProposalPage: React.FC = () => {
 
             {/* Change Tickets */}
             <div className="mb-4">
-              <label htmlFor="changeTickets" className="block text-sm font-medium">
+              <label
+                htmlFor="changeTickets"
+                className="block text-sm font-medium"
+              >
                 Change Tickets* (per month)
               </label>
               <input
@@ -315,52 +336,60 @@ const InputProposalPage: React.FC = () => {
               />
             </div>
 
-            
-{/* Submit */}
-<div className="text-center">
-  <button
-    type="submit"
-    className={`w-full py-2 px-4 rounded ${
-      isProcessing ? "bg-red-500" : "bg-blue-900 hover:bg-blue-800"
-    } text-white`}
-    disabled={isProcessing}
-  >
-    {isProcessing ? "Processing..." : "Submit"}
-  </button>
-  {isProcessing && (
-    <div
-      className="mt-4 text-2xl font-bold animate-[flash_0.5s_ease-in-out_infinite italic text-blue-700"
-    >
-      ProposalForge is hard at work crafting your masterpiece. Sit tight and avoid refreshing the magic!
-    </div>
-  )}
-</div>
+            {/* Submit */}
+            <div className="text-center">
+              <button
+                type="submit"
+                className={`w-full py-2 px-4 rounded ${
+                  isProcessing
+                    ? "bg-red-500"
+                    : "bg-blue-900 hover:bg-blue-800"
+                } text-white`}
+                disabled={isProcessing}
+              >
+                {isProcessing ? "Processing..." : "Submit"}
+              </button>
+              {isProcessing && (
+                <div className="mt-4 text-2xl font-bold italic animate-[flash_0.5s_ease-in-out_infinite] text-blue-700">
+                  ProposalForge is hard at work crafting your masterpiece. Sit
+                  tight and avoid refreshing the magic!
+                </div>
+              )}
+            </div>
 
-{/* Information Box */}
-<div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-  <h3 className="text-base font-semibold mb-2 text-blue-700 italic">Importance of Ticket Count in Support Pricing</h3>
-  <p className="text-sm mb-2 text-blue-700 italic">
-    Ticket count influences pricing as it reflects the workload. More tickets require additional resources, impacting costs.
-  </p>
-  <h4 className="text-sm mb-1 text-blue-700 italic">Types of Tickets</h4>
-  <ol className="text-sm pl-5 space-y-1 text-blue-700 italic">
-    <li>
-      <span className="font-bold">Incident Tickets:</span> Address disruptions (e.g., crashes, errors) to restore normal operations quickly.
-    </li>
-    <li>
-      <span className="font-bold">Service Requests:</span> Handle routine tasks like account setup or permissions.
-    </li>
-    <li>
-      <span className="font-bold">Change Tickets:</span> Manage controlled changes, such as updates or feature modifications.
-    </li>
-  </ol>
-</div>
-
+            {/* Information Box */}
+            <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <h3 className="text-base font-semibold mb-2 text-blue-700 italic">
+                Importance of Ticket Count in Support Pricing
+              </h3>
+              <p className="text-sm mb-2 text-blue-700 italic">
+                Ticket count influences pricing as it reflects the workload.
+                More tickets require additional resources, impacting costs.
+              </p>
+              <h4 className="text-sm mb-1 text-blue-700 italic">
+                Types of Tickets
+              </h4>
+              <ol className="text-sm pl-5 space-y-1 text-blue-700 italic">
+                <li>
+                  <span className="font-bold">Incident Tickets:</span> Address
+                  disruptions (e.g., crashes, errors) to restore normal
+                  operations quickly.
+                </li>
+                <li>
+                  <span className="font-bold">Service Requests:</span> Handle
+                  routine tasks like account setup or permissions.
+                </li>
+                <li>
+                  <span className="font-bold">Change Tickets:</span> Manage
+                  controlled changes, such as updates or feature modifications.
+                </li>
+              </ol>
+            </div>
           </form>
         </div>
-
       )}
     </div>
   );
 };
+
 export default InputProposalPage;
