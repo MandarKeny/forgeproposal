@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "next/link"; 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, Sparkles, FileEdit, Palette, Twitter, Linkedin } from "lucide-react";
@@ -54,7 +54,7 @@ export default function Home() {
           </p>
           <Link href="/credentials">
             <Button className="bg-red-500 hover:bg-red-600 text-white px-10 py-4 rounded-lg shadow-lg text-lg transition-transform transform hover:scale-105">
-            Explore the Beta Version Set Up for IT Services
+              Explore the Beta Version Set Up for IT Services
             </Button>
           </Link>
         </div>
@@ -100,7 +100,7 @@ export default function Home() {
             <CardContent className="p-6 space-y-4 text-center">
               <FileEdit className="w-12 h-12 text-purple-500 transform hover:rotate-45 transition-transform duration-300" />
               <h3 className="text-xl font-bold text-purple-500">
-                Accurate & Compliant
+                Accurate &amp; Compliant
               </h3>
               <p className="text-gray-600">
                 Includes hallucination, citation, and compliance reports for reliable, accurate proposals every time.
@@ -130,19 +130,19 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             <blockquote className="bg-white p-6 rounded-lg shadow-md">
               <p className="text-gray-700 italic">
-                "ProposalForge has transformed our workflow. We've saved countless hours and seen a 50% increase in proposal acceptance rates!"
+                &quot;ProposalForge has transformed our workflow. We&apos;ve saved countless hours and seen a 50% increase in proposal acceptance rates!&quot;
               </p>
               <footer className="mt-4 text-sm text-gray-500">— Ramesh Kumar, CEO at TechVision</footer>
             </blockquote>
             <blockquote className="bg-white p-6 rounded-lg shadow-md">
               <p className="text-gray-700 italic">
-                "The accuracy and speed of ProposalForge are unmatched. It's like having a dedicated team working round the clock for you."
+                &quot;The accuracy and speed of ProposalForge are unmatched. It&apos;s like having a dedicated team working round the clock for you.&quot;
               </p>
               <footer className="mt-4 text-sm text-gray-500">— Priya Sharma, Director at InnovateIndia</footer>
             </blockquote>
             <blockquote className="bg-white p-6 rounded-lg shadow-md">
               <p className="text-gray-700 italic">
-                "We've cut proposal creation time by over 70% thanks to ProposalForge. It's a must-have for any competitive business."
+                &quot;We&apos;ve cut proposal creation time by over 70% thanks to ProposalForge. It&apos;s a must-have for any competitive business.&quot;
               </p>
               <footer className="mt-4 text-sm text-gray-500">— Vikram Malhotra, Manager at StratEdge</footer>
             </blockquote>
