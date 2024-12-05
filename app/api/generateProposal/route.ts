@@ -81,8 +81,8 @@ export async function POST(request: Request) {
       .replace(/\{\{ Client Objectives \}\}/g, clientObjectives.join(", "));
 
     const modelConfig: Record<string, ModelConfig> = {
-      "gpt-3.5-turbo": { maxTokens: 4096, temperature: 0.5 },
-      "gpt-4o-mini": { maxTokens: 7000, temperature: 0.7 },
+      "gpt-3.5-turbo": { maxTokens: 4096, temperature: 0.6 },
+      "gpt-4o-mini": { maxTokens: 6000, temperature: 0.6 },
     };
 
     // Call the OpenAI API
