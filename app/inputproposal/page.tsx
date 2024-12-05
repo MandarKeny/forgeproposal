@@ -31,25 +31,34 @@ const InputProposalPage: React.FC = () => {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value, checked } = e.target;
-
-    if (name === "clientObjectives") {
-      const updatedObjectives = checked
-        ? [...formData.clientObjectives, value]
-        : formData.clientObjectives.filter((obj) => obj !== value);
-      setFormData({ ...formData, clientObjectives: updatedObjectives });
+    const target = e.target;
+  
+    // Handle checkboxes for clientObjectives
+    if (target instanceof HTMLInputElement && target.type === "checkbox") {
+      const { name, value, checked } = target;
+  
+      if (name === "clientObjectives") {
+        const updatedObjectives = checked
+          ? [...formData.clientObjectives, value] // Add the value if checked
+          : formData.clientObjectives.filter((obj) => obj !== value); // Remove the value if unchecked
+  
+        setFormData({ ...formData, clientObjectives: updatedObjectives });
+      }
     } else {
+      // Handle other input types (text, number, and select)
+      const { name, value } = target;
       setFormData({
         ...formData,
         [name]:
           name === "incidentTickets" ||
           name === "serviceRequests" ||
           name === "changeTickets"
-            ? parseInt(value, 10) || 0
-            : value,
+            ? parseInt(value, 10) || 0 // Parse numeric inputs
+            : value, // Set text or select inputs
       });
     }
   };
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

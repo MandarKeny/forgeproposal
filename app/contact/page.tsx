@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 
 export default function Contact() {
   const [messageDisplayed, setMessageDisplayed] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setMessageDisplayed(true);
   };
@@ -100,7 +100,7 @@ export default function Contact() {
                 id="message"
                 placeholder="Your Message"
                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
-                rows="4"
+                rows={4}
                 required
               ></textarea>
             </div>
@@ -118,7 +118,7 @@ export default function Contact() {
               <p className="text-gray-600">
                 We value your feedback and collaboration. If you have any
                 suggestions to improve this platform or are interested in
-                partnering with us, feel free to contact Mandar on the email
+                partnering with us, feel free to contact Mandar at the email
                 below.
               </p>
             </div>

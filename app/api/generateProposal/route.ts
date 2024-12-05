@@ -3,9 +3,24 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+// Configure OpenAI instance
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY!,
 });
+
+// Define types for the request body
+interface GenerateProposalRequest {
+  companyName: string;
+  clientName: string;
+  clientObjectives: string[];
+  model: "gpt-3.5-turbo" | "gpt-4o-mini";
+}
+
+// Define the model configuration type
+type ModelConfig = {
+  maxTokens: number;
+  temperature: number;
+};
 
 export async function POST(request: Request) {
   try {
@@ -13,7 +28,9 @@ export async function POST(request: Request) {
       throw new Error("OpenAI API key is missing. Ensure it is set in your environment variables.");
     }
 
-    const { companyName, clientName, clientObjectives, model } = await request.json();
+    const body: GenerateProposalRequest = await request.json();
+
+    const { companyName, clientName, clientObjectives, model } = body;
 
     // Validate required inputs
     if (!companyName || !clientName || !clientObjectives || !model) {
@@ -30,12 +47,13 @@ export async function POST(request: Request) {
       );
     }
 
-    const modelMap = {
+    // Map and validate model selection
+    const modelMap: Record<string, string> = {
       "gpt-3.5-turbo": "gpt-3.5-turbo",
-      "gpt-4o-mini": "gpt-4o-mini"
+      "gpt-4o-mini": "gpt-4o-mini",
     };
 
-    const selectedModel = modelMap[model as keyof typeof modelMap];
+    const selectedModel = modelMap[model];
     if (!selectedModel) {
       return NextResponse.json(
         { error: "Invalid model selected. Please choose gpt-3.5-turbo or gpt-4o-mini." },
@@ -43,8 +61,9 @@ export async function POST(request: Request) {
       );
     }
 
+    // Load the proposal template
     const sampleProposalPath = path.join(process.cwd(), "public/templates/SampleProposal.txt");
-    let proposalTemplate;
+    let proposalTemplate: string;
     try {
       proposalTemplate = fs.readFileSync(sampleProposalPath, "utf-8");
     } catch (error) {
@@ -55,16 +74,18 @@ export async function POST(request: Request) {
       );
     }
 
+    // Customize the template
     const customizedTemplate = proposalTemplate
       .replace(/\{\{ Your Company Name \}\}/g, companyName)
       .replace(/\{\{ Client Name \}\}/g, clientName)
       .replace(/\{\{ Client Objectives \}\}/g, clientObjectives.join(", "));
 
-    const modelConfig = {
+    const modelConfig: Record<string, ModelConfig> = {
       "gpt-3.5-turbo": { maxTokens: 4096, temperature: 0.5 },
-      "gpt-4o-mini": { maxTokens: 7000, temperature: 0.7 }
+      "gpt-4o-mini": { maxTokens: 7000, temperature: 0.7 },
     };
 
+    // Call the OpenAI API
     let completion;
     try {
       completion = await openai.chat.completions.create({
@@ -85,7 +106,7 @@ export async function POST(request: Request) {
           - 6. Transition (Land Safe, Run Better, Run Different)
           - 7. Success Stories
           - 8. Why Us as Your Partner (Ensure this section lists numbered points)
-          `
+          `,
           },
           {
             role: "user",
@@ -93,25 +114,25 @@ export async function POST(request: Request) {
           },
         ],
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("OpenAI API Error:", error);
       return NextResponse.json(
         {
           error: "Failed to generate proposal. OpenAI API returned an error.",
-          details: process.env.NODE_ENV === "development" ? error.response?.data || error.stack : undefined,
+          details: process.env.NODE_ENV === "development" ? String(error) : undefined,
         },
-        { status: error.response?.status || 500 }
+        { status: 500 }
       );
     }
 
     const generatedProposal = completion.choices[0].message.content;
     return NextResponse.json({ proposal: generatedProposal });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error generating proposal:", error);
     return NextResponse.json(
       {
-        error: error.message || "Failed to generate proposal.",
-        details: process.env.NODE_ENV === "development" ? error.stack : undefined
+        error: (error as Error).message || "Failed to generate proposal.",
+        details: process.env.NODE_ENV === "development" ? String(error) : undefined,
       },
       { status: 500 }
     );

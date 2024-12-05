@@ -78,7 +78,7 @@ export default function Leadership() {
                 A fintech innovator at Moglix, Lokesh has scaled Credlix AUM to
                 $50M and managed Vedanta's $15B e-commerce portal. With 5+ years
                 of product management experience, he combines growth marketing
-                and analytics expertise to drive success in India’s dynamic
+                and analytics expertise to drive success in India's dynamic
                 startup ecosystem.
               </p>
             </CardContent>
