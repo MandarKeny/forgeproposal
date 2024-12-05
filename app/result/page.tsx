@@ -64,12 +64,10 @@ const ResultsContent = () => {
       {/* Navigation Banner */}
       <nav className="flex justify-between items-center p-4 border-b border-gray-200">
         <Link href="/">
-          <Image
+        <img
             src="/images/your-image-file-name.png"
             alt="ProposalForge Logo"
-            width={192}
-            height={192}
-            priority
+            className="h-32"
           />
         </Link>
         <div className="flex gap-4">

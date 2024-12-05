@@ -39,9 +39,14 @@ export default function FAQs() {
         "Version 1 focuses on Application Support proposals. Upcoming versions will expand to include Application Development, Service Desk, Cloud Services, and other IT service areas, enabling comprehensive support for diverse business needs."
     },
     {
+      question: "How does ProposalForge help in strategy development?",
+      answer:
+        "ProposalForge&apos;s Flight Plan feature empowers teams to define strategic approaches and win themes while guiding the proposal development process. By automating content creation and solutioning frameworks, ProposalForge allows teams to focus on refining strategies to win more business."
+    },
+    {
       question: "Is training required to use ProposalForge?",
       answer:
-        "ProposalForge is designed for intuitive use, minimizing the need for extensive training. The platform's user-friendly interface enables quick integration and adoption, allowing teams to realize value immediately."
+        "ProposalForge is designed for intuitive use, minimizing the need for extensive training. The platform&apos;s user-friendly interface enables quick integration and adoption, allowing teams to realize value immediately."
     },
     {
       question: "How secure is our proposal data in ProposalForge?",
@@ -52,54 +57,45 @@ export default function FAQs() {
 
   return (
     <div className="min-h-screen bg-white text-black">
-      {/* Navigation Bar */}
       <nav className="flex justify-between items-center p-4 border-b border-gray-200">
         <Link href="/">
-          <img
+        <img
             src="/images/your-image-file-name.png"
             alt="ProposalForge Logo"
-            className="h-36"
+            className="h-32"
           />
         </Link>
         <div className="flex gap-4">
           <Link href="/platform">
-            <Button variant="secondary" className="font-[Arial]">
+            <Button variant="secondary" className="font-[&apos;Arial&apos;]">
               ProposalForge Platform
             </Button>
           </Link>
           <Link href="/leadership">
-            <Button variant="secondary" className="font-[Arial]">
+            <Button variant="secondary" className="font-[&apos;Arial&apos;]">
               Leadership
             </Button>
           </Link>
           <Link href="/faqs">
-            <Button variant="secondary" className="font-[Arial]">
+            <Button variant="secondary" className="font-[&apos;Arial&apos;]">
               FAQs
             </Button>
           </Link>
           <Link href="/contact">
-            <Button variant="secondary" className="font-[Arial]">
+            <Button variant="secondary" className="font-[&apos;Arial&apos;]">
               Contact Us
             </Button>
           </Link>
         </div>
       </nav>
 
-      {/* FAQ Section */}
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold mb-8 text-black">
-          Frequently Asked Questions
-        </h1>
+        <h1 className="text-3xl font-bold mb-8 text-black">Frequently Asked Questions</h1>
 
         <div className="space-y-6">
           {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="bg-gray-50 p-6 rounded-lg border border-gray-200"
-            >
-              <h2 className="text-xl font-bold mb-2 text-black">
-                {faq.question}
-              </h2>
+            <div key={index} className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <h2 className="text-xl font-bold mb-2 text-black">{faq.question}</h2>
               <p className="text-gray-600">{faq.answer}</p>
             </div>
           ))}

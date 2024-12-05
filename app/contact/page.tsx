@@ -18,10 +18,10 @@ export default function Contact() {
       {/* Navigation Bar */}
       <nav className="flex justify-between items-center p-4 border-b border-gray-200">
         <Link href="/">
-          <img
+        <img
             src="/images/your-image-file-name.png"
             alt="ProposalForge Logo"
-            className="h-36"
+            className="h-32"
           />
         </Link>
         <div className="flex gap-4">

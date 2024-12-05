@@ -129,7 +129,7 @@ const InputProposalPage: React.FC = () => {
         <img
             src="/images/your-image-file-name.png"
             alt="ProposalForge Logo"
-            className="h-36"
+            className="h-32"
           />
         </Link>
         <div className="flex gap-4">
@@ -158,11 +158,9 @@ const InputProposalPage: React.FC = () => {
 
       {/* Info Box */}
       <div className="bg-blue-900 text-white p-4 rounded-lg shadow-md mb-8 text-center">
-        ProposalForge currently specializes in generating responses for
-        application support proposals, helping enterprises maintain critical
-        systems like SAP and CRM applications. Our platform streamlines the
-        process of creating proposals for application support services, with
-        new features planned for release in the coming months.
+      ProposalForge is a versatile platform that can be tailored for any B2B proposal generation setup, offering customizable solutions to meet your specific business needs. 
+      The beta version is currently set up for IT services, with a focus on generating responses for application maintenance proposals. 
+      Application maintenance involves supporting and enhancing critical enterprise systems such as SAP and CRM applications to ensure optimal performance and reliability.
       </div>
 
       {/* Topic Selection Section */}
@@ -352,26 +350,55 @@ const InputProposalPage: React.FC = () => {
               />
             </div>
 
-            {/* Submit */}
-            <div className="text-center">
-              <button
-                type="submit"
-                className={`w-full py-2 px-4 rounded ${
-                  isProcessing
-                    ? "bg-red-500"
-                    : "bg-blue-900 hover:bg-blue-800"
-                } text-white`}
-                disabled={isProcessing}
-              >
-                {isProcessing ? "Processing..." : "Submit"}
-              </button>
-              {isProcessing && (
-                <div className="mt-4 text-2xl font-bold italic animate-[flash_0.5s_ease-in-out_infinite] text-blue-700">
-                  ProposalForge is hard at work crafting your masterpiece. Sit
-                  tight and avoid refreshing the magic!
-                </div>
-              )}
-            </div>
+           {/* Submit */}
+<div className="text-center">
+  <button
+    type="submit"
+    className={`w-full py-2 px-4 rounded ${
+      isProcessing
+        ? "bg-red-500"
+        : "bg-blue-900 hover:bg-blue-800"
+    } text-white`}
+    disabled={isProcessing}
+  >
+    {isProcessing
+      ? "Processing...ProposalForge is hard at work crafting your masterpiece."
+      : "Submit"}
+  </button>
+  {isProcessing && (
+    <div
+      className="mt-4 text-2xl font-bold italic animate-bounce text-blue-700"
+      style={{
+        animation: "pulseColor 1.5s infinite, bounce 1s infinite",
+      }}
+    >
+      Sit tight and avoid refreshing the magic!
+    </div>
+  )}
+</div>
+
+<style jsx>{`
+  @keyframes pulseColor {
+    0% {
+      color: #1e40af; /* dark blue */
+    }
+    50% {
+      color: #2563eb; /* lighter blue */
+    }
+    100% {
+      color: #1e40af; /* dark blue */
+    }
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+`}</style>
 
             {/* Information Box */}
             <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">

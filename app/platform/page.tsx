@@ -10,7 +10,7 @@ export default function Platform() {
           <img
             src="/images/your-image-file-name.png"
             alt="ProposalForge Logo"
-            className="h-36"
+            className="h-32"
           />
         </Link>
         <div className="flex gap-4">
