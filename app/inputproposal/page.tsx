@@ -367,9 +367,9 @@ const InputProposalPage: React.FC = () => {
   </button>
   {isProcessing && (
     <div
-      className="mt-4 text-2xl font-bold italic animate-bounce text-blue-700"
+      className="mt-4 text-2xl font-bold animate-bounce text-blue-700"
       style={{
-        animation: "pulseColor 1.5s infinite, bounce 1s infinite",
+        animation: "pulseColor 1s infinite, bounce 1s infinite",
       }}
     >
       Sit tight and avoid refreshing the magic!
@@ -402,17 +402,17 @@ const InputProposalPage: React.FC = () => {
 
             {/* Information Box */}
             <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-              <h3 className="text-base font-semibold mb-2 text-blue-700 italic">
+              <h3 className="text-base font-semibold mb-2 text-blue-700">
                 Importance of Ticket Count in Support Pricing
               </h3>
-              <p className="text-sm mb-2 text-blue-700 italic">
+              <p className="text-sm mb-2 text-blue-700">
                 Ticket count influences pricing as it reflects the workload.
                 More tickets require additional resources, impacting costs.
               </p>
-              <h4 className="text-sm mb-1 text-blue-700 italic">
+              <h4 className="text-sm mb-1 text-blue-700">
                 Types of Tickets
               </h4>
-              <ol className="text-sm pl-5 space-y-1 text-blue-700 italic">
+              <ol className="text-sm pl-5 space-y-1 text-blue-700">
                 <li>
                   <span className="font-bold">Incident Tickets:</span> Address
                   disruptions (e.g., crashes, errors) to restore normal
