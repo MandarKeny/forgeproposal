@@ -50,13 +50,13 @@ export async function POST(request: Request) {
     // Map and validate model selection
     const modelMap: Record<string, string> = {
       "gpt-3.5-turbo": "gpt-3.5-turbo",
-      "gpt-4-turbo": "gpt-4-turbo",
+      "gpt-4o-mini": "gpt-4o-mini",
     };
 
     const selectedModel = modelMap[model];
     if (!selectedModel) {
       return NextResponse.json(
-        { error: "Invalid model selected. Please choose gpt-3.5-turbo or gpt-4-turbo." },
+        { error: "Invalid model selected. Please choose gpt-3.5-turbo or gpt-4o-mini." },
         { status: 400 }
       );
     }
@@ -82,7 +82,7 @@ export async function POST(request: Request) {
 
     const modelConfig: Record<string, ModelConfig> = {
       "gpt-3.5-turbo": { maxTokens: 4096, temperature: 0.7 },
-      "gpt-4-turbo": { maxTokens: 4096, temperature: 0.7 },
+      "gpt-4o-mini": { maxTokens: 7000, temperature: 0.6 },
     };
 
     // Call the OpenAI API
@@ -96,7 +96,7 @@ export async function POST(request: Request) {
           {
             role: "system",
             content: `You are a professional business proposal writer specializing in IT services and solutions.
-          Write a detailed proposal using the provided input. Divide the proposal into the following sections:
+          Write a detailed 7 page proposal using the provided input. Divide the proposal into the following sections:
           - Thank You Note
           - 1. Our Understanding of Your Objectives
           - 2. Our Capabilities
