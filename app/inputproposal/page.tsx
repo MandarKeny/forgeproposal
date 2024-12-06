@@ -241,7 +241,7 @@ const InputProposalPage: React.FC = () => {
             {/* Model Selection */}
             <div className="mb-4">
               <label htmlFor="model" className="block text-sm font-medium">
-                Select the LLM model
+                Select the AI model
               </label>
               <select
                 id="model"
