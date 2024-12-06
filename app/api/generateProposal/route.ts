@@ -81,8 +81,8 @@ export async function POST(request: Request) {
       .replace(/\{\{ Client Objectives \}\}/g, clientObjectives.join(", "));
 
     const modelConfig: Record<string, ModelConfig> = {
-      "gpt-3.5-turbo": { maxTokens: 4096, temperature: 0.7 },
-      "gpt-4o-mini": { maxTokens: 4096, temperature: 0.7 },
+      "gpt-3.5-turbo": { maxTokens: 2500, temperature: 0.7 },
+      "gpt-4o-mini": { maxTokens: 2500, temperature: 0.7 },
     };
 
     // Call the OpenAI API
@@ -95,7 +95,7 @@ export async function POST(request: Request) {
         messages: [
           {
             role: "system",
-            content: `You are an expert business proposal writer specializing in IT services. Write a comprehensive 7-page proposal based on the provided input, structured as follows:
+            content: `You are an expert business proposal writer specializing in IT services. Write a proposal based on the provided input, structured as follows:
             - Thank You Note
             - 1. Understanding Client Objectives
             - 2. Capabilities Overview
