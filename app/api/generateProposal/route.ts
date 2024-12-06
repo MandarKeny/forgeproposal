@@ -82,7 +82,7 @@ export async function POST(request: Request) {
 
     const modelConfig: Record<string, ModelConfig> = {
       "gpt-3.5-turbo": { maxTokens: 4096, temperature: 0.7 },
-      "gpt-4o-mini": { maxTokens: 7000, temperature: 0.6 },
+      "gpt-4o-mini": { maxTokens: 4096, temperature: 0.7 },
     };
 
     // Call the OpenAI API
@@ -95,18 +95,16 @@ export async function POST(request: Request) {
         messages: [
           {
             role: "system",
-            content: `You are a professional business proposal writer specializing in IT services and solutions.
-          Write a detailed 7 page proposal using the provided input. Divide the proposal into the following sections:
-          - Thank You Note
-          - 1. Our Understanding of Your Objectives
-          - 2. Our Capabilities
-          - 3. Our Solution
-          - 4. Operating Model
-          - 5. Engagement Roadmap
-          - 6. Transition (Land Safe, Run Better, Run Different)
-          - 7. Success Stories
-          - 8. Why Us as Your Partner (Ensure this section lists numbered points)
-          `,
+            content: `You are an expert business proposal writer specializing in IT services. Write a comprehensive 7-page proposal based on the provided input, structured as follows:
+            - Thank You Note
+            - 1. Understanding Client Objectives
+            - 2. Capabilities Overview
+            - 3. Proposed Solution
+            - 4. Operating Model
+            - 5. Engagement Roadmap
+            - 6. Transition Plan (Land Safe, Run Better, Run Different)
+            - 7. Success Stories
+            - 8. Why Choose Us (Include numbered points).`
           },
           {
             role: "user",

@@ -11,7 +11,7 @@ interface FormDataType {
   incidentTickets: number;
   serviceRequests: number;
   changeTickets: number;
-  model: "gpt-3.5-turbo" | "gpt-4o-mini"; // Updated
+  model: "gpt-3.5-turbo" | "gpt-4o-mini";// Updated
 }
 
 interface ErrorType {
@@ -251,7 +251,7 @@ const InputProposalPage: React.FC = () => {
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
               >
                 <option value="gpt-3.5-turbo">GPT-3.5 (Turbo)</option>
-  <option value="gpt-4o-mini">GPT-4o mini </option>
+                <option value="gpt-4o-mini">GPT-4o-mini</option>
               </select>
             </div>
 
