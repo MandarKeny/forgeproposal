@@ -40,25 +40,29 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative bg-cover bg-center" style={{ backgroundImage: "url('/images/abstract-background.jpg')" }}>
-        <div className="absolute inset-0 bg-gradient-to-t from-white/80 to-transparent"></div>
-        <div className="container mx-auto px-4 py-16 text-center relative z-10">
-          <h1 className="text-5xl font-bold text-black mb-6 leading-tight">
-            From Business Proposal to Signed Deal{" "}
-            <span className="bg-gradient-to-r from-blue-500 to-red-500 text-transparent bg-clip-text">
-              in Record Time
-            </span>
-          </h1>
-          <p className="text-lg font-bold text-gray-600 leading-relaxed mb-12">
-            Where AI Precision Meets Your Expertise to Generate Custom, Persuasive Proposals in Minutes, Not Days
-          </p>
-          <Link href="/credentials">
-            <Button className="bg-red-500 hover:bg-red-600 text-white px-10 py-4 rounded-lg shadow-lg text-lg transition-transform transform hover:scale-105">
-              Explore the Beta Version Set Up for IT Services
-            </Button>
-          </Link>
-        </div>
-      </div>
+<div
+  className="relative bg-cover bg-center zoom-background"
+  style={{ backgroundImage: "url('/images/abstract-background.jpg')" }}
+>
+  <div className="absolute inset-0 bg-gradient-to-t from-white/80 to-transparent"></div>
+  <div className="container mx-auto px-4 py-16 text-center relative z-10">
+    <h1 className="text-5xl font-bold text-black mb-6 leading-tight">
+      From Business Proposal to Signed Deal <br />
+      <span className="block bg-gradient-to-r from-blue-500 to-red-500 text-transparent bg-clip-text">
+        in Record Time
+      </span>
+    </h1>
+    <p className="text-lg font-bold text-gray-600 leading-relaxed mb-12">
+      Where AI Precision Meets Your Expertise to Generate Custom, Persuasive Proposals in Minutes, Not Days
+    </p>
+    <Link href="/credentials">
+      <Button className="bg-red-500 hover:bg-red-600 text-white px-10 py-4 rounded-lg shadow-lg text-lg transition-transform transform hover:scale-105">
+        Explore the Beta Version Set Up for IT Services
+      </Button>
+    </Link>
+  </div>
+</div>
+
 
       {/* Features Section */}
       <div className="container mx-auto px-4 py-16">

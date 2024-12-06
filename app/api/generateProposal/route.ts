@@ -50,13 +50,13 @@ export async function POST(request: Request) {
     // Map and validate model selection
     const modelMap: Record<string, string> = {
       "gpt-3.5-turbo": "gpt-3.5-turbo",
-      "gpt-4o-mini": "gpt-4o-mini",
+      "gpt-4-turbo": "gpt-4-turbo",
     };
 
     const selectedModel = modelMap[model];
     if (!selectedModel) {
       return NextResponse.json(
-        { error: "Invalid model selected. Please choose gpt-3.5-turbo or gpt-4o-mini." },
+        { error: "Invalid model selected. Please choose gpt-3.5-turbo or gpt-4-turbo." },
         { status: 400 }
       );
     }
@@ -82,7 +82,7 @@ export async function POST(request: Request) {
 
     const modelConfig: Record<string, ModelConfig> = {
       "gpt-3.5-turbo": { maxTokens: 4096, temperature: 0.7 },
-      "gpt-4o-mini": { maxTokens: 14000, temperature: 0.5 },
+      "gpt-4-turbo": { maxTokens: 4096, temperature: 0.7 },
     };
 
     // Call the OpenAI API

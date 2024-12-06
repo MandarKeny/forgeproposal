@@ -78,3 +78,18 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Added Animation for Subtle Zoom-In Background */
+@keyframes zoomIn {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+/* Utility Class for Hero Section Background Animation */
+.zoom-background {
+  animation: zoomIn 20s ease-in-out infinite alternate;
+}
