@@ -20,7 +20,8 @@
     ],
     "paths": {
       "@/*": ["./*"]                          // Shorten import paths
-    }
+    },
+    "typeRoots": ["./types", "node_modules/@types"] // Include custom and default type definitions
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

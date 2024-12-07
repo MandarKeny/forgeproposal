@@ -95,16 +95,8 @@ export async function POST(request: Request) {
         messages: [
           {
             role: "system",
-            content: `You are an expert business proposal writer specializing in IT services. Write a proposal based on the provided input, structured as follows:
-            - Thank You Note
-            - 1. Understanding Client Objectives
-            - 2. Capabilities Overview
-            - 3. Proposed Solution
-            - 4. Operating Model
-            - 5. Engagement Roadmap
-            - 6. Transition Plan (Land Safe, Run Better, Run Different)
-            - 7. Success Stories
-            - 8. Why Choose Us (Include numbered points).`
+            content: `Expert IT services proposal writer. Include ONLY the following sections in numered manner : Thank You Note, 1. Understanding Client Objectives, 2. Capabilities Overview, 3. Proposed Solution, 4. Operating Model
+            , 5. Engagement Roadmap, `
           },
           {
             role: "user",
