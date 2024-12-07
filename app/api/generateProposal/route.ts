@@ -81,7 +81,7 @@ export async function POST(request: Request) {
       .replace(/\{\{ Client Objectives \}\}/g, clientObjectives.join(", "));
 
     const modelConfig: Record<string, ModelConfig> = {
-      "gpt-3.5-turbo": { maxTokens: 2500, temperature: 0.7 },
+      "gpt-3.5-turbo": { maxTokens: 4096, temperature: 0.7 },
       "gpt-4o-mini": { maxTokens: 2500, temperature: 0.7 },
     };
 
