@@ -100,9 +100,9 @@ const ResultsContent = () => {
   return (
     <div className="min-h-screen bg-white text-black">
       <div className="container mx-auto px-4 py-12">
-        {/* Static Title Section */}
+        {/* Dynamic Title Section */}
         <h1 className="text-3xl font-bold text-blue-900 mb-7 text-center">
-          ProposalForge generated custom proposal
+          {`${companyName}'s proposal to ${clientName}`}
         </h1>
 
         {/* Part 1 Button */}
