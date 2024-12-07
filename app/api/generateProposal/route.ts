@@ -95,8 +95,20 @@ export async function POST(request: Request) {
         messages: [
           {
             role: "system",
-            content: `Expert IT services proposal writer. Include ONLY the following sections in numered manner : Thank You Note, 1. Understanding Client Objectives, 2. Capabilities Overview, 3. Proposed Solution, 4. Operating Model
-            , 5. Engagement Roadmap, `
+            content: `
+              You are an expert IT services proposal writer. Generate a proposal using consistent markdown formatting:
+              - Use \`#\` for main section titles.
+              - Use \`##\` for subsections.
+              - Use \`-\` for bullet points.
+              Ensure all content adheres to this style.
+              Include ONLY the following sections in a numbered manner:
+              1. Thank You Note
+              2. Understanding Client Objectives
+              3. Capabilities Overview
+              4. Proposed Solution
+              5. Operating Model
+              6. Engagement Roadmap
+            `,
           },
           {
             role: "user",
