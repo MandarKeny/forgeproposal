@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const ResultsComponent = () => {
   const searchParams = useSearchParams();
@@ -99,11 +101,48 @@ const ResultsComponent = () => {
 
   return (
     <div className="min-h-screen bg-white text-black">
+      {/* Navigation Bar */}
+      <nav className="flex justify-between items-center p-4 border-b border-gray-200">
+        <Link href="/">
+          <img
+            src="/images/your-image-file-name.png"
+            alt="ProposalForge Logo"
+            className="h-32"
+          />
+        </Link>
+        <div className="flex gap-4">
+          <Link href="/platform">
+            <Button variant="secondary" className="font-[Arial]">
+              ProposalForge Platform
+            </Button>
+          </Link>
+          <Link href="/leadership">
+            <Button variant="secondary" className="font-[Arial]">
+              Leadership
+            </Button>
+          </Link>
+          <Link href="/faqs">
+            <Button variant="secondary" className="font-[Arial]">
+              FAQs
+            </Button>
+          </Link>
+          <Link href="/contact">
+            <Button variant="secondary" className="font-[Arial]">
+              Contact Us
+            </Button>
+          </Link>
+        </div>
+      </nav>
+
       <div className="container mx-auto px-4 py-12">
-        {/* Dynamic Title Section */}
-        <h1 className="text-3xl font-bold text-blue-900 mb-7 text-center">
-          {`${companyName}'s proposal to ${clientName}`}
+        {/* Dynamic Title Section - Now left-aligned */}
+        <h1 className="text-3xl font-bold text-blue-900 mb-7 text-left">
+          ProposalForge generated proposal
         </h1>
+
+        <h2 className="text-xs text-white mb-7 text-left">
+          {`${companyName}'s proposal to ${clientName}`}
+        </h2>
 
         {/* Part 1 Button */}
         <div className="text-left mb-4">
@@ -144,7 +183,7 @@ const ResultsComponent = () => {
         </div>
 
         {/* Budgetary Quote Section */}
-        <h2 className="text-3xl font-bold text-blue-900 mb-7 text-center">
+        <h2 className="text-3xl font-bold text-blue-900 mb-7 text-left">
           Budgetary quote based on ticket data
         </h2>
         <div className="bg-gray-200 p-4 rounded-lg shadow-md">
