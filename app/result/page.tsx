@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-const ResultsContent = () => {
+const ResultsComponent = () => {
   const searchParams = useSearchParams();
 
   // Retrieve `companyName` and `clientName` from the query parameters or fallback to default values
@@ -187,5 +187,11 @@ const ResultsContent = () => {
     </div>
   );
 };
+
+const ResultsContent = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <ResultsComponent />
+  </Suspense>
+);
 
 export default ResultsContent;
