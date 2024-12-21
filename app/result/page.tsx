@@ -9,8 +9,8 @@ const ResultsComponent = () => {
   const searchParams = useSearchParams();
 
   // Retrieve `companyName` and `clientName` from query parameters or fallback to default values
-  const companyName = searchParams.get("companyName") || "";
-  const clientName = searchParams.get("clientName") || "";
+  const companyName = searchParams.get("companyName") || "Your Company Name";
+  const clientName = searchParams.get("clientName") || "Client Name";
 
   const [proposalPart1, setProposalPart1] = useState("Loading Part 1...");
   const [proposalPart2, setProposalPart2] = useState(
@@ -174,8 +174,8 @@ const ResultsComponent = () => {
           ProposalForge generated proposal
         </h1>
 
-        <h2 className="text-xs text-gray-600 mb-7 text-left">
-          {`${companyName} ${clientName}`}
+        <h2 className="text-xs text-white mb-7 text-left">
+          {`${companyName}'s proposal to ${clientName}`}
         </h2>
 
         {/* Part 1 Button */}
