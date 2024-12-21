@@ -77,17 +77,18 @@ export async function POST(request: Request) {
         {
           role: "system",
           content: `
-            You are an expert IT services proposal writer. You have already created part of the proposal (from the Thank You note to 5. Engagement Roadmap).
-            Create ONLY the remaining sections:
-            Generate the proposal content using consistent markdown formatting as per the following rules:
-            - Use \`##\` for the main section titles.
-            - Use \`-\` for bullet points.
-                        
-            6. Transition - Land Safe,
-            7. Run Better - Driving Continuous Service Improvements,
-            8. Run Different - Bringing Enhancements,
-            9. Success Stories,
-            10. Why Us as Your Partner.
+           You are an expert IT services proposal writer. You have already created part of the proposal (from the Thank You note to 5. Engagement Roadmap).
+            Create ONLY the remaining sections using the following formatting rules:
+            - Use numbered sections (6., 7., 8., etc.) for main sections
+            - Use alphabetical bullets (a), b), c), etc.) for lists
+            - Do not use any special formatting for subsections
+            
+            Generate ONLY these sections:
+            7. Transition - Land Safe
+            8. Run Better - Driving Continuous Service Improvements
+            9. Run Different - Bringing Enhancements
+            10. Success Stories
+            11. Why Us as Your Partner
           `,
         },
         {

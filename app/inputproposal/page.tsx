@@ -241,7 +241,7 @@ const InputProposalPage: React.FC = () => {
             {/* Model Selection */}
             <div className="mb-4">
               <label htmlFor="model" className="block text-sm font-medium">
-                Select the AI model
+              Choose Your AI Engine
               </label>
               <select
                 id="model"
@@ -250,8 +250,8 @@ const InputProposalPage: React.FC = () => {
                 onChange={handleInputChange}
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
               >
-                <option value="gpt-3.5-turbo">GPT-3.5 (Turbo)</option>
-                <option value="gpt-4o-mini">GPT-4o-mini</option>
+                <option value="gpt-3.5-turbo">GPT-3.5 (Turbo) - Draft Quality, Low Price</option>
+                <option value="gpt-4o-mini">GPT-4o-mini - Best Quality, High Price</option>
               </select>
             </div>
 

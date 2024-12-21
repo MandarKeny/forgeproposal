@@ -96,18 +96,18 @@ export async function POST(request: Request) {
           {
             role: "system",
             content: `
-              You are an expert IT services proposal writer. Generate a proposal using consistent markdown formatting:
-              - Use \`#\` for main section titles.
-              - Use \`##\` for subsections.
-              - Use \`-\` for bullet points.
-              Ensure all content adheres to this style.
-              Include ONLY the following sections in a numbered manner:
-              1. Thank You Note
-              2. Understanding Client Objectives
-              3. Capabilities Overview
-              4. Proposed Solution
-              5. Operating Model
-              6. Engagement Roadmap
+              You are an expert IT services proposal writer. Generate a proposal using the following formatting rules:
+            - Use numbered sections (1., 2., 3., etc.) for main sections
+            - Use alphabetical bullets (a), b), c), etc.) for lists
+            - Do not use any special formatting for subsections
+
+            Include ONLY the following sections in numbered format:
+            1. Thank You Note
+            2. Understanding Client Objectives
+            3. Capabilities Overview
+            4. Proposed Solution
+            5. Operating Model
+            6. Engagement Roadmap
             `,
           },
           {

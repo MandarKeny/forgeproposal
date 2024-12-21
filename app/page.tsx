@@ -43,14 +43,14 @@ export default function Home() {
       <div className="relative bg-cover bg-center" style={{ backgroundImage: "url('/images/abstract-background.jpg')" }}>
         <div className="absolute inset-0 bg-gradient-to-t from-white/80 to-transparent"></div>
         <div className="container mx-auto px-4 py-16 text-center relative z-10">
-          <h1 className="text-5xl font-bold text-black mb-6 leading-tight">
-            From Business Proposal to Signed Deal{" "}
+          <h1 className="text-4xl font-bold text-black mb-6 leading-tight">
+          Create Winning B2B Proposals in Minutes {" "}
             <span className="bg-gradient-to-r from-blue-500 to-red-500 text-transparent bg-clip-text">
-              in Record Time
+            with ProposalForge
             </span>
           </h1>
-          <p className="text-lg font-bold text-gray-600 leading-relaxed mb-12">
-            Where AI Precision Meets Your Expertise to Generate Custom, Persuasive Proposals in Minutes, Not Days
+          <p className="text-lg font-bold text-gray-600 leading-relaxed mb-14">
+          Turbocharge your sales with AI-generated, high-quality, error-free proposals tailored to impress clients
           </p>
           <Link href="/credentials">
             <Button className="bg-red-500 hover:bg-red-600 text-white px-10 py-4 rounded-lg shadow-lg text-lg transition-transform transform hover:scale-105">
@@ -74,10 +74,10 @@ export default function Home() {
             <CardContent className="p-6 space-y-4 text-center">
               <Clock className="w-12 h-12 text-blue-500 transform hover:rotate-45 transition-transform duration-300" />
               <h3 className="text-xl font-bold text-blue-500">
-                Guaranteed Results
+              Rapid Proposal Creation
               </h3>
               <p className="text-gray-600">
-                Realize value quickly and eliminate the need for your team to learn a new platform. ProposalForge integrates seamlessly with SharePoint, Excel, Word, and more.
+              Generate client-focused, review-ready proposals in minutes, reducing creation time by 50% with generative AI and past insights.
               </p>
             </CardContent>
           </Card>
@@ -87,10 +87,10 @@ export default function Home() {
             <CardContent className="p-6 space-y-4 text-center">
               <Sparkles className="w-12 h-12 text-green-500 transform hover:rotate-45 transition-transform duration-300" />
               <h3 className="text-xl font-bold text-green-500">
-                Create Proposals Quickly
+              Client-Centric Approach
               </h3>
               <p className="text-gray-600">
-                Generate complete, review-ready proposals of 40-60 pages in minutes with consistent voice, style, and win themes.
+              Tailor proposals to client needs, ensuring they align with goals and priorities.
               </p>
             </CardContent>
           </Card>
@@ -100,10 +100,10 @@ export default function Home() {
             <CardContent className="p-6 space-y-4 text-center">
               <FileEdit className="w-12 h-12 text-purple-500 transform hover:rotate-45 transition-transform duration-300" />
               <h3 className="text-xl font-bold text-purple-500">
-                Accurate &amp; Compliant
+              Accurate &amp; Error-Free
               </h3>
               <p className="text-gray-600">
-                Includes hallucination, citation, and compliance reports for reliable, accurate proposals every time.
+              Ensure precision and eliminate human errors with compliance checks, hallucination prevention, and detailed citations for error-free, compliant proposals.
               </p>
             </CardContent>
           </Card>
@@ -116,7 +116,7 @@ export default function Home() {
                 Iterate on Strategy
               </h3>
               <p className="text-gray-600">
-                Focus on refining your strategy while ProposalForge handles the words. Rapidly iterate on high-level concepts and win themes.
+              Focus on strategy while ProposalForge refines content, win themes, and formatting for you.
               </p>
             </CardContent>
           </Card>

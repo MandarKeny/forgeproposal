@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
 const ResultsComponent = () => {
   const searchParams = useSearchParams();
 
-  // Retrieve `companyName` and `clientName` from the query parameters or fallback to default values
-  const companyName = searchParams.get("companyName") || "Your Company Name";
-  const clientName = searchParams.get("clientName") || "Client Name";
+  // Retrieve `companyName` and `clientName` from query parameters or fallback to default values
+  const companyName = searchParams.get("companyName") || "";
+  const clientName = searchParams.get("clientName") || "";
 
   const [proposalPart1, setProposalPart1] = useState("Loading Part 1...");
   const [proposalPart2, setProposalPart2] = useState(
@@ -58,6 +58,41 @@ const ResultsComponent = () => {
     }
 
     setIsGeneratingPart2(false);
+  };
+
+  const downloadAsWord = async () => {
+    try {
+      const response = await fetch("/api/generateWord", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          companyName,
+          clientName,
+          part1Content: proposalPart1,
+          part2Content: proposalPart2,
+        }),
+      });
+
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${companyName}-Proposal-for-${clientName}.docx`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+      } else {
+        console.error("Error generating Word document");
+        alert("Failed to generate Word document. Please try again.");
+      }
+    } catch (error) {
+      console.error("Download Error:", error);
+      alert("Failed to download document. Please try again.");
+    }
   };
 
   const calculateCosts = () => {
@@ -135,13 +170,12 @@ const ResultsComponent = () => {
       </nav>
 
       <div className="container mx-auto px-4 py-12">
-        {/* Dynamic Title Section - Now left-aligned */}
         <h1 className="text-3xl font-bold text-blue-900 mb-7 text-left">
           ProposalForge generated proposal
         </h1>
 
-        <h2 className="text-xs text-white mb-7 text-left">
-          {`${companyName}'s proposal to ${clientName}`}
+        <h2 className="text-xs text-gray-600 mb-7 text-left">
+          {`${companyName} ${clientName}`}
         </h2>
 
         {/* Part 1 Button */}
@@ -180,6 +214,16 @@ const ResultsComponent = () => {
           >
             {proposalPart2}
           </pre>
+        </div>
+
+        {/* Download as Word Button */}
+        <div className="text-left mb-8">
+          <button
+            className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded shadow-md"
+            onClick={downloadAsWord}
+          >
+            Download as MS Word
+          </button>
         </div>
 
         {/* Budgetary Quote Section */}

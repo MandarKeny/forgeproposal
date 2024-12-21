@@ -4,12 +4,11 @@ Thank You Note
 Thank you for the opportunity to present this proposal for application support services. At {{ Your Company Name }}, we are honored to be considered as your trusted IT partner. This proposal is tailored to address {{ Client Name }}’s unique challenges and objectives, delivering measurable outcomes that drive operational excellence, cost savings, and innovation.
 
 1. Our Understanding of Your Objectives
+1. Our Understanding of Your Objectives
 We understand that {{ Client Name }} is seeking a partner to:
 
-Ensure high application availability through a reliable and proactive support framework.
-Enhance operational efficiency with effective incident and problem management.
-Drive cost reductions without compromising service quality.
-Future-proof operations through innovative technology solutions and scalable support models.
+{{ Client Objectives }}
+
 By aligning our services with your business objectives, we aim to help {{ Client Name }} achieve operational excellence and sustainable growth.
 
 2. Our Capabilities
